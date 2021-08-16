@@ -37,7 +37,7 @@ function App() {
           />
         </Menu.Menu>
       </Menu>
-      <Suspense>
+      <Suspense fallback="loading">
         <Routes/>
       </Suspense>
 
