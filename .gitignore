@@ -1,4 +1,5 @@
 portfolio/node_modules
 portfolio/package-lock.json
+portfolio/artifacts
 *.DS_Store
 *yarn.lock
