@@ -1,0 +1,19 @@
+body{
+  padding-top: 8px;
+  background-color: #c2d7e9;
+}
+
+#me{
+  font-family: 'Gilda Display', serif;
+  font-size: 22px;
+  padding: 0.370em 0.1em;
+  font-weight: 800;
+}
+
+a {
+  color: #db63a9;
+}
+
+a:hover{
+  color: #e04c9d;
+}
