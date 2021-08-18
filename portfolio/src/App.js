@@ -20,20 +20,19 @@ function App() {
         <Menu.Item
           id = "me"
           name='Anirudh Rahul'
-          // active={activeItem === 'home'}
-          // onClick={this.handleItemClick}
+          onClick={()=>{location.href="/"}}
         />
 
         <Menu.Menu position='right'>
           <Menu.Item
             name='Projects'
             // active={activeItem === 'messages'}
-            // onClick={this.handleItemClick}
-          />
+            onClick={()=>{location.href="/projects"}}
+            />
           <Menu.Item
             name='Graphs'
             // active={activeItem === 'friends'}
-            // onClick={this.handleItemClick}
+            onClick={()=>{location.href="/graphs"}}
           />
         </Menu.Menu>
       </Menu>

@@ -4,3 +4,4 @@ portfolio/artifacts
 portfolio/dist
 *.DS_Store
 *yarn.lock
+portfolio/.netlify/state.json

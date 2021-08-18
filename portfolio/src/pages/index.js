@@ -10,7 +10,7 @@ export default () => (
     </p>
 
     <p>
-      Currently I'm a member of the <a href="https://hackmit.org/">HackMIT</a> dev team, and I've been working on a bunch of our apps including our registration platform feather, our mobile app, and our admissions puzzle.
+      Currently I'm a member of the <a href="https://hackmit.org/">HackMIT</a> dev team, and I've been working on maintaing our suite of <a href="https://www.notion.so/Join-HackMIT-Dev-8484e088859640e0a0b5af1a4ddbec4d">apps</a>, and our <a href="my.hackwsb.net">admissions puzzle.</a>
     </p>
 
     <p>
