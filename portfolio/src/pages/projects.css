@@ -1,0 +1,75 @@
+/* Label colors! */
+.Javascript{
+    background-color: #E8741B !important;
+    color: #fff !important;
+}
+
+[class*="Node.js"]{
+    background-color: #D22F55 !important;
+    color: #fff !important;
+}
+
+.Redis{
+    background-color: #D82C20 !important;
+    color: #fff !important;
+}
+
+.CSS{
+    background-color: #563d7c !important;
+    color: #fff !important;
+}
+
+.Java{
+    background-color: #b07219 !important;
+    color: #fff !important;
+}
+
+.Android{
+    background-color: #a4c639 !important;
+    color: #fff !important;
+}
+
+.Solidity{
+    background-color: #AA6746 !important;
+    color: #fff !important;
+}
+
+[class*="C++"]{
+    background-color: #f34b7d !important;
+    color: #fff !important;
+}
+
+[class*="Suffix Arrays"]{
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+.Reversing{
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+.CentOS{
+    background-color: #212078 !important;
+    color: #fff !important;
+}
+
+.Lambda{
+    background-color: #D26213 !important;
+    color: #fff !important;
+}
+
+.DynamoDB{
+    background-color: #1F578F !important;
+    color: #fff !important;
+}
+
+.Nginx{
+    background-color: #068E35 !important;
+    color: #fff !important;
+}
+
+.S3{
+    background-color: #E25443 !important;
+    color: #fff !important;
+}

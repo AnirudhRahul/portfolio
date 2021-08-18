@@ -15,10 +15,10 @@ function Project(props) {
             <div className="right-card">
                 <Header size="large" className="card-title">{props.title||''}</Header>
 
-                <LabelGroup color="black" className="card-labels">
+                <LabelGroup className="card-labels">
                     {
                         (props.skills||[]).map((skill)=>
-                            <Label className={skill} onClick={()=>console.log("Clicked")}>{skill}</Label>
+                            <Label className={skill} key={skill} onClick={()=>console.log("Clicked")}>{skill}</Label>
                         )
                     }
                 </LabelGroup>
