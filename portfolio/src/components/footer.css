@@ -1,0 +1,25 @@
+.footer-divider{
+    margin-top: 2.5em;
+    padding-top: 1em;
+    padding-bottom: 2em;
+    border-top-color: rgba(34, 36, 38, 0.15);
+    border-top-width: 2px;
+    border-top-style: solid;
+    text-align: center;
+  }
+  
+  .icon-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .icon-row i:hover{
+    color: #111 !important;
+    opacity: 0.8 !important;
+  }
+  
+  .email{
+    margin-top: 8px;
+  }

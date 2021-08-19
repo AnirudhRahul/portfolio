@@ -5,6 +5,8 @@ import 'semantic-ui-css/semantic.min.css'
 import Project from '../components/Project.js'
 import './projects.css'
 
+import Footer from '../components/Footer.js'
+
 export default () => (
   <Container textAlign='center'> 
     <h1>Projects</h1>
@@ -49,8 +51,7 @@ export default () => (
       desc="Created a C++ script that uses audio hashing and suffix arrays(to find repeating substrings) in order to find intros/endings for tv shows."
       githubLink="https://github.com/AnirudhRahul/IntroMark"
       skills={["C++", "Suffix Arrays"]}/>
-
-
-    {/* <Project></Project> */}
+    
+    <Footer/>
   </Container>
 )

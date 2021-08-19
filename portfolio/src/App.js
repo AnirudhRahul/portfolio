@@ -1,10 +1,10 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useState } from 'react'
 import { Root, Routes, addPrefetchExcludes } from 'react-static'
 
 import { Link, Router } from 'components/Router'
 import Dynamic from 'containers/Dynamic'
 
-import {Container, Menu} from 'semantic-ui-react'
+import {Container, Divider, Icon, IconGroup, Menu, Segment} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
 import './app.css'
@@ -15,7 +15,7 @@ addPrefetchExcludes(['dynamic'])
 function App() {
   return (
     <Root>
-      <Container centered text>
+      <Container text className="centered">
       <Menu pointing secondary>
         <Menu.Item
           id = "me"
@@ -39,7 +39,7 @@ function App() {
       <Suspense fallback="loading">
         <Routes/>
       </Suspense>
-
+    
       </Container>
     </Root>
   )
