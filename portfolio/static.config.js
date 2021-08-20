@@ -2,6 +2,8 @@ import path from 'path'
 import axios from 'axios'
 import React from 'react'
 
+const gh_stats = require('./githubStats.js')
+
 export default {
   siteRoot: 'https://anirudhrahul.com',
 
@@ -9,8 +11,12 @@ export default {
     // const { data: posts } = await axios.get(
     //   'https://jsonplaceholder.typicode.com/posts'
     // )
+    const github_data = await gh_stats.getDiffsByDay()
 
-    return [
+    return [{
+      path: '/graphs',
+      getData: () => ({big_list: github_data}),
+    }
       // {
       //   path: '/blog',
       //   getData: () => ({

@@ -7,3 +7,10 @@
         margin-right: auto !important;
     }
 }
+
+.bio{
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+}
