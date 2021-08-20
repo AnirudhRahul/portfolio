@@ -5,3 +5,4 @@ portfolio/dist
 *.DS_Store
 *yarn.lock
 portfolio/.netlify/state.json
+portfolio/.env

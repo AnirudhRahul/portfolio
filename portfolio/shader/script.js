@@ -340,9 +340,9 @@ function initPointFlowers() {
     pointFlower.area = Vector3.create(20.0, 20.0, 20.0);
     pointFlower.area.x = pointFlower.area.y * renderSpec.aspect;
     
-    pointFlower.fader.x = 10.0; //env fade start
+    pointFlower.fader.x = pointFlower.area.z/2; //env fade start
     pointFlower.fader.y = pointFlower.area.z; //env fade half
-    pointFlower.fader.z = 0.1;  //near fade start
+    pointFlower.fader.z = 0;  //near fade start
     
     //particles
     var PI2 = Math.PI * 2.0;
@@ -357,21 +357,21 @@ function initPointFlowers() {
         tmpv3.y = symmetryrand() * 0.2 - 1.0;
         tmpv3.z = symmetryrand() * 0.3 + 0.5;
         Vector3.normalize(tmpv3);
-        tmpv = 2.0 + Math.random() * 1.0;
+        tmpv = 1.0 + Math.random() * 1.0;
         tmpprtcl.setVelocity(tmpv3.x * tmpv, tmpv3.y * tmpv, tmpv3.z * tmpv);
         
         //rotation
         tmpprtcl.setRotation(
-            symmetryrand() * PI2 * 0.5,
-            symmetryrand() * PI2 * 0.5,
-            symmetryrand() * PI2 * 0.5
+            symmetryrand() * PI2 * 0.3,
+            symmetryrand() * PI2 * 0.3,
+            symmetryrand() * PI2 * 0.3
         );
         
         //position
         tmpprtcl.setPosition(
             symmetryrand() * pointFlower.area.x,
             symmetryrand() * pointFlower.area.y,
-            symmetryrand() * pointFlower.area.z
+            symmetryrand() * pointFlower.area.z+10000
         );
         
         //euler
@@ -382,7 +382,7 @@ function initPointFlowers() {
         );
         
         //size
-        tmpprtcl.setSize(0.9 + Math.random() * 0.1);
+        tmpprtcl.setSize(3*(0.9 + Math.random() * 0.15));
     }
 }
 
@@ -587,8 +587,8 @@ function createEffectLib() {
     effectLib.mkBrightBuf = createEffectProgram(cmnvtxsrc, frgsrc, null, null);
     
     // direction blur
-    frgsrc = document.getElementById("fx_dirblur_r4_fsh").textContent;
-    effectLib.dirBlur = createEffectProgram(cmnvtxsrc, frgsrc, ['uBlurDir'], null);
+    // frgsrc = document.getElementById("fx_dirblur_r4_fsh").textContent;
+    // effectLib.dirBlur = createEffectProgram(cmnvtxsrc, frgsrc, ['uBlurDir'], null);
     
     //final composite
     vtxsrc = document.getElementById("pp_final_vsh").textContent;
@@ -642,21 +642,24 @@ function renderPostProcess() {
     unuseEffect(effectLib.mkBrightBuf);
     
     // make bloom
-    for(var i = 0; i < 2; i++) {
-        var p = 1.5 + 1 * i;
-        var s = 2.0 + 1 * i;
-        bindRT(renderSpec.wHalfRT1, true);
-        useEffect(effectLib.dirBlur, renderSpec.wHalfRT0);
-        gl.uniform4f(effectLib.dirBlur.program.uniforms.uBlurDir, p, 0.0, s, 0.0);
-        drawEffect(effectLib.dirBlur);
-        unuseEffect(effectLib.dirBlur);
-        
-        bindRT(renderSpec.wHalfRT0, true);
-        useEffect(effectLib.dirBlur, renderSpec.wHalfRT1);
-        gl.uniform4f(effectLib.dirBlur.program.uniforms.uBlurDir, 0.0, p, 0.0, s);
-        drawEffect(effectLib.dirBlur);
-        unuseEffect(effectLib.dirBlur);
-    }
+    // likely not needed since we may heavily blur anyway
+    // if(bloom){
+    //     for(var i = 0; i < 2; i++) {
+    //         var p = 1.5 + 1 * i;
+    //         var s = 2.0 + 1 * i;
+    //         bindRT(renderSpec.wHalfRT1, true);
+    //         useEffect(effectLib.dirBlur, renderSpec.wHalfRT0);
+    //         gl.uniform4f(effectLib.dirBlur.program.uniforms.uBlurDir, p, 0.0, s, 0.0);
+    //         drawEffect(effectLib.dirBlur);
+    //         unuseEffect(effectLib.dirBlur);
+            
+    //         bindRT(renderSpec.wHalfRT0, true);
+    //         useEffect(effectLib.dirBlur, renderSpec.wHalfRT1);
+    //         gl.uniform4f(effectLib.dirBlur.program.uniforms.uBlurDir, 0.0, p, 0.0, s);
+    //         drawEffect(effectLib.dirBlur);
+    //         unuseEffect(effectLib.dirBlur);
+    //     }
+    // }
     
     //display
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
@@ -703,10 +706,10 @@ function renderScene() {
     //gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     gl.bindFramebuffer(gl.FRAMEBUFFER, renderSpec.mainRT.frameBuffer);
     gl.viewport(0, 0, renderSpec.mainRT.width, renderSpec.mainRT.height);
-    gl.clearColor(0.005, 0, 0.05, 0);
+    gl.clearColor(0.76/2, 0.84/2, 0.91/2, 0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     
-    renderBackground();
+    // renderBackground();
     renderPointFlowers();
     renderPostProcess();
 }
@@ -757,9 +760,14 @@ function toggleAnimation(elm) {
     }
 }
 
-function stepAnimation() {
-    if(!animating) animate();
+var bloom = true;
+function toggleBloom() {
+    bloom^=true;
 }
+
+// function stepAnimation() {
+//     if(!animating) animate();
+// }
 
 function animate() {
     var curdate = new Date();
@@ -776,8 +784,10 @@ function makeCanvasFullScreen(canvas) {
 	var d = document.documentElement;
 	fullw = window.innerWidth;
 	fullh = window.innerHeight;
-	canvas.width = fullw/1.5;
-	canvas.height = fullh/1.5;
+	canvas.width = fullw/1.2;
+	canvas.height = fullh/1.2;
+    canvas.filter = 'blur(40px)';
+
 }
 
 window.addEventListener('load', function(e) {
