@@ -55,9 +55,6 @@ function Graphs(props) {
           }
           <ReactApexChart series={series} options={options}></ReactApexChart>
 
-           stroke: {
-                curve: 'smooth'
-              },
         
           <Footer/>
         

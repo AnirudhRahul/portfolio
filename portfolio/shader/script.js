@@ -1,4 +1,5 @@
 // Utilities
+var canvas = document.getElementById("sakura");
 var Vector3 = {};
 var Matrix44 = {};
 Vector3.create = function(x, y, z) {
@@ -90,13 +91,11 @@ Matrix44.loadLookAt = function (m, vpos, vlook, vup) {
     m[15] = 1.0;
 };
 
-//
 var timeInfo = {
     'start':0, 'prev':0, // Date
     'delta':0, 'elapsed':0 // Number(sec)
 };
 
-//
 var gl;
 var renderSpec = {
     'width':0,
@@ -382,7 +381,7 @@ function initPointFlowers() {
         );
         
         //size
-        tmpprtcl.setSize(3*(0.9 + Math.random() * 0.15));
+        tmpprtcl.setSize(2*(1.0 + Math.random() * 0.3));
     }
 }
 
@@ -587,8 +586,8 @@ function createEffectLib() {
     effectLib.mkBrightBuf = createEffectProgram(cmnvtxsrc, frgsrc, null, null);
     
     // direction blur
-    // frgsrc = document.getElementById("fx_dirblur_r4_fsh").textContent;
-    // effectLib.dirBlur = createEffectProgram(cmnvtxsrc, frgsrc, ['uBlurDir'], null);
+    frgsrc = document.getElementById("fx_dirblur_r4_fsh").textContent;
+    effectLib.dirBlur = createEffectProgram(cmnvtxsrc, frgsrc, ['uBlurDir'], null);
     
     //final composite
     vtxsrc = document.getElementById("pp_final_vsh").textContent;
@@ -624,7 +623,7 @@ function initPostProcess() {
 }
 
 function renderPostProcess() {
-    gl.enable(gl.TEXTURE_2D);
+    // gl.enable(gl.TEXTURE_2D);
     gl.disable(gl.DEPTH_TEST);
     var bindRT = function (rt, isclear) {
         gl.bindFramebuffer(gl.FRAMEBUFFER, rt.frameBuffer);
@@ -643,23 +642,23 @@ function renderPostProcess() {
     
     // make bloom
     // likely not needed since we may heavily blur anyway
-    // if(bloom){
-    //     for(var i = 0; i < 2; i++) {
-    //         var p = 1.5 + 1 * i;
-    //         var s = 2.0 + 1 * i;
-    //         bindRT(renderSpec.wHalfRT1, true);
-    //         useEffect(effectLib.dirBlur, renderSpec.wHalfRT0);
-    //         gl.uniform4f(effectLib.dirBlur.program.uniforms.uBlurDir, p, 0.0, s, 0.0);
-    //         drawEffect(effectLib.dirBlur);
-    //         unuseEffect(effectLib.dirBlur);
+    if(bloom){
+        for(var i = 0; i < 2; i++) {
+            var p = 1.5 + 1 * i;
+            var s = 2.0 + 1 * i;
+            bindRT(renderSpec.wHalfRT1, true);
+            useEffect(effectLib.dirBlur, renderSpec.wHalfRT0);
+            gl.uniform4f(effectLib.dirBlur.program.uniforms.uBlurDir, p, 0.0, s, 0.0);
+            drawEffect(effectLib.dirBlur);
+            unuseEffect(effectLib.dirBlur);
             
-    //         bindRT(renderSpec.wHalfRT0, true);
-    //         useEffect(effectLib.dirBlur, renderSpec.wHalfRT1);
-    //         gl.uniform4f(effectLib.dirBlur.program.uniforms.uBlurDir, 0.0, p, 0.0, s);
-    //         drawEffect(effectLib.dirBlur);
-    //         unuseEffect(effectLib.dirBlur);
-    //     }
-    // }
+            bindRT(renderSpec.wHalfRT0, true);
+            useEffect(effectLib.dirBlur, renderSpec.wHalfRT1);
+            gl.uniform4f(effectLib.dirBlur.program.uniforms.uBlurDir, 0.0, p, 0.0, s);
+            drawEffect(effectLib.dirBlur);
+            unuseEffect(effectLib.dirBlur);
+        }
+    }
     
     //display
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
@@ -709,7 +708,6 @@ function renderScene() {
     gl.clearColor(0.76/2, 0.84/2, 0.91/2, 0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     
-    // renderBackground();
     renderPointFlowers();
     renderPostProcess();
 }
@@ -720,7 +718,7 @@ function onResize(e) {
     lastResize = now
     setTimeout(()=>{
         if(now==lastResize){
-            makeCanvasFullScreen(document.getElementById("sakura"));
+            makeCanvasFullScreen();
             setViewports();
             if(sceneStandBy) {
                 initScene();
@@ -779,21 +777,16 @@ function animate() {
     render();
 }
 
-function makeCanvasFullScreen(canvas) {
-    var b = document.body;
-	var d = document.documentElement;
+function makeCanvasFullScreen() {
 	fullw = window.innerWidth;
 	fullh = window.innerHeight;
-	canvas.width = fullw/1.2;
-	canvas.height = fullh/1.2;
-    canvas.filter = 'blur(40px)';
-
+	canvas.width = fullw;
+	canvas.height = fullh;
 }
 
 window.addEventListener('load', function(e) {
-    var canvas = document.getElementById("sakura");
     try {
-        makeCanvasFullScreen(canvas);
+        makeCanvasFullScreen();
         gl = canvas.getContext('experimental-webgl');
     } catch(e) {
         alert("WebGL not supported." + e);
