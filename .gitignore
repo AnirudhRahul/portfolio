@@ -6,3 +6,4 @@ portfolio/dist
 *yarn.lock
 portfolio/.netlify/state.json
 portfolio/.env
+portfolio/tmp

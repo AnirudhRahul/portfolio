@@ -21,7 +21,7 @@ function Graphs(props) {
             filtered_list[index] += filtered_list[index-1]
         }
         console.log(filtered_list)
-        // break;
+
         series.push({
             name: name,
             data: filtered_list
@@ -31,19 +31,22 @@ function Graphs(props) {
     const options = {
         chart:{
             type: 'area',
-            height: 350,
             stacked: true,
         },
-        // stroke: {
-        //     curve: 'smooth'
-        // }
+        stroke: {
+            curve: 'smooth'
+        },
+
+        xaxis: {
+            type: 'datetime'
+        }  
     }
 
 
     return (
         <Container className="very padded">
 
-          <p>{JSON.stringify(big_list[0])}</p>
+          {/* <p>{JSON.stringify(big_list[0])}</p>
           { 
             big_list.map((item)=>
                 <Segment.Group horizontal>
@@ -52,7 +55,7 @@ function Graphs(props) {
                 </Segment.Group>
             )
 
-          }
+          } */}
           <ReactApexChart series={series} options={options}></ReactApexChart>
 
         

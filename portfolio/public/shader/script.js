@@ -301,7 +301,7 @@ function createPointFlowers() {
     var prm = gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE);
     renderSpec.pointSize = {'min':prm[0], 'max':prm[1]};
     
-    var vtxsrc = "\nuniform mat4 uProjection;\nuniform mat4 uModelview;\nuniform vec3 uResolution;\nuniform vec3 uOffset;\nuniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius\nuniform vec3 uFade; //x:start distance, y:half distance, z:near fade start\n\nattribute vec3 aPosition;\nattribute vec3 aEuler;\nattribute vec2 aMisc; //x:size, y:fade\n\nvarying vec3 pposition;\nvarying float psize;\nvarying float palpha;\nvarying float pdist;\n\n//varying mat3 rotMat;\nvarying vec3 normX;\nvarying vec3 normY;\nvarying vec3 normZ;\nvarying vec3 normal;\n\nvarying float diffuse;\nvarying float specular;\nvarying float rstop;\nvarying float distancefade;\n\nvoid main(void) {\n    // Projection is based on vertical angle\n    vec4 pos = uModelview * vec4(aPosition + uOffset, 1.0);\n    gl_Position = uProjection * pos;\n    gl_PointSize = aMisc.x * uProjection[1][1] / -pos.z * uResolution.y * 0.5;\n    \n    pposition = pos.xyz;\n    psize = aMisc.x;\n    pdist = length(pos.xyz);\n    palpha = smoothstep(0.0, 1.0, (pdist - 0.1) / uFade.z);\n    \n    vec3 elrsn = sin(aEuler);\n    vec3 elrcs = cos(aEuler);\n    mat3 rotx = mat3(\n        1.0, 0.0, 0.0,\n        0.0, elrcs.x, elrsn.x,\n        0.0, -elrsn.x, elrcs.x\n    );\n    mat3 roty = mat3(\n        elrcs.y, 0.0, -elrsn.y,\n        0.0, 1.0, 0.0,\n        elrsn.y, 0.0, elrcs.y\n    );\n    mat3 rotz = mat3(\n        elrcs.z, elrsn.z, 0.0, \n        -elrsn.z, elrcs.z, 0.0,\n        0.0, 0.0, 1.0\n    );\n    mat3 rotmat = rotx * roty * rotz;\n    normal = rotmat[2];\n    \n    mat3 trrotm = mat3(\n        rotmat[0][0], rotmat[1][0], rotmat[2][0],\n        rotmat[0][1], rotmat[1][1], rotmat[2][1],\n        rotmat[0][2], rotmat[1][2], rotmat[2][2]\n    );\n    normX = trrotm[0];\n    normY = trrotm[1];\n    normZ = trrotm[2];\n    \n    const vec3 lit = vec3(0.6917144638660746, 0.6917144638660746, -0.20751433915982237);\n    \n    float tmpdfs = dot(lit, normal);\n    if(tmpdfs < 0.0) {\n        normal = -normal;\n        tmpdfs = dot(lit, normal);\n    }\n    diffuse = 1.0 + tmpdfs/2.0;\n    \n    vec3 eyev = normalize(-pos.xyz);\n    if(dot(eyev, normal) > 0.0) {\n        vec3 hv = normalize(eyev + lit);\n        specular = pow(max(dot(hv, normal), 0.0), 50.0)/2.0;\n    }\n    else {\n        specular = 0.0;\n    }\n    \n    rstop = clamp((abs(pdist - uDOF.x) - uDOF.y) / uDOF.z, 0.0, 1.0);\n    //rstop = pow(rstop, 1.0);\n    //-0.69315 = ln(0.5)\n    //distancefade = min(1.0, exp((uFade.x - pdist) * 0.69315 / uFade.y));\n    distancefade = 1.0;\n}\n"
+    var vtxsrc = "\nuniform mat4 uProjection;\nuniform mat4 uModelview;\nuniform vec3 uResolution;\nuniform vec3 uOffset;\nuniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius\nuniform vec3 uFade; //x:start distance, y:half distance, z:near fade start\n\nattribute vec3 aPosition;\nattribute vec3 aEuler;\nattribute vec2 aMisc; //x:size, y:fade\n\nvarying vec3 pposition;\nvarying float psize;\nvarying float palpha;\nvarying float pdist;\n\n//varying mat3 rotMat;\nvarying vec3 normX;\nvarying vec3 normY;\nvarying vec3 normZ;\nvarying vec3 normal;\n\nvarying float diffuse;\nvarying float specular;\nvarying float rstop;\nvarying float distancefade;\n\nvoid main(void) {\n    // Projection is based on vertical angle\n    vec4 pos = uModelview * vec4(aPosition + uOffset, 1.0);\n    gl_Position = uProjection * pos;\n    gl_PointSize = aMisc.x * uProjection[1][1] / -pos.z * uResolution.y * 0.5;\n    \n    pposition = pos.xyz;\n    psize = aMisc.x;\n    pdist = length(pos.xyz);\n    palpha = smoothstep(0.0, 1.0, (pdist - 0.1) / uFade.z);\n    \n    vec3 elrsn = sin(aEuler);\n    vec3 elrcs = cos(aEuler);\n    mat3 rotx = mat3(\n        1.0, 0.0, 0.0,\n        0.0, elrcs.x, elrsn.x,\n        0.0, -elrsn.x, elrcs.x\n    );\n    mat3 roty = mat3(\n        elrcs.y, 0.0, -elrsn.y,\n        0.0, 1.0, 0.0,\n        elrsn.y, 0.0, elrcs.y\n    );\n    mat3 rotz = mat3(\n        elrcs.z, elrsn.z, 0.0, \n        -elrsn.z, elrcs.z, 0.0,\n        0.0, 0.0, 1.0\n    );\n    mat3 rotmat = rotx * roty * rotz;\n    normal = rotmat[2];\n    \n    mat3 trrotm = mat3(\n        rotmat[0][0], rotmat[1][0], rotmat[2][0],\n        rotmat[0][1], rotmat[1][1], rotmat[2][1],\n        rotmat[0][2], rotmat[1][2], rotmat[2][2]\n    );\n    normX = trrotm[0];\n    normY = trrotm[1];\n    normZ = trrotm[2];\n    \n    const vec3 lit = vec3(0.6917144638660746, 0.6917144638660746, -0.20751433915982237);\n    \n    float tmpdfs = dot(lit, normal);\n    if(tmpdfs < 0.0) {\n        normal = -normal;\n        tmpdfs = dot(lit, normal);\n    }\n    diffuse = 1.0 + tmpdfs/2.0;\n    \n    vec3 eyev = normalize(-pos.xyz);\n    if(dot(eyev, normal) > 0.0) {\n        vec3 hv = normalize(eyev + lit);\n        specular = pow(max(dot(hv, normal), 0.0), 50.0)/8.0;\n    }\n    else {\n        specular = 0.0;\n    }\n    \n    rstop = clamp((abs(pdist - uDOF.x) - uDOF.y) / uDOF.z, 0.0, 1.0);\n    //rstop = pow(rstop, 1.0);\n    //-0.69315 = ln(0.5)\n    //distancefade = min(1.0, exp((uFade.x - pdist) * 0.69315 / uFade.y));\n    distancefade = 1.0;\n}\n"
     var frgsrc = "\n#ifdef GL_ES\n//precision mediump float;\nprecision highp float;\n#endif\n\nuniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius\nuniform vec3 uFade; //x:start distance, y:half distance, z:near fade start\n\nconst vec3 fadeCol = vec3(0.08, 0.03, 0.06);\n\nvarying vec3 pposition;\nvarying float psize;\nvarying float palpha;\nvarying float pdist;\n\n//varying mat3 rotMat;\nvarying vec3 normX;\nvarying vec3 normY;\nvarying vec3 normZ;\nvarying vec3 normal;\n\nvarying float diffuse;\nvarying float specular;\nvarying float rstop;\nvarying float distancefade;\n\nfloat ellipse(vec2 p, vec2 o, vec2 r) {\n    vec2 lp = (p - o) / r;\n    return length(lp) - 1.0;\n}\n\nvoid main(void) {\n    vec3 p = vec3(gl_PointCoord - vec2(0.5, 0.5), 0.0) * 2.5;\n    vec3 d = vec3(0.0, 0.0, -1.0);\n    float nd = normZ.z; //dot(-normZ, d);\n    if(abs(nd) < 0.0001) discard;\n    \n    float np = dot(normZ, p);\n    vec3 tp = p + d * np / nd;\n    vec2 coord = vec2(dot(normX, tp), dot(normY, tp));\n    \n    //angle = 15 degree\n    const float flwrsn = 0.258819045102521;\n    const float flwrcs = 0.965925826289068;\n    mat2 flwrm = mat2(flwrcs, -flwrsn, flwrsn, flwrcs);\n    vec2 flwrp = vec2(abs(coord.x), coord.y) * flwrm;\n    \n    float r;\n    if(flwrp.x < 0.0) {\n        r = ellipse(flwrp, vec2(0.065, 0.024) * 0.5, vec2(0.36, 0.96) * 0.5);\n    }\n    else {\n        r = ellipse(flwrp, vec2(0.065, 0.024) * 0.5, vec2(0.58, 0.96) * 0.5);\n    }\n    \n    if(r > rstop) discard;\n    \n    vec3 col = mix(vec3(1.0, 0.8, 0.75), vec3(1.0, 0.9, 0.87), r);\n\n    float grady = mix(0.0, 1.0, pow(coord.y * 0.5 + 0.5, 0.35));\n    //grady = 1.0;\n    col *= vec3(1.0, grady, grady);\n    col *= mix(0.8, 1.0, pow(abs(coord.x), 0.3));\n    col = col * diffuse + specular;\n    \n    col = mix(fadeCol, col, distancefade);\n    \n    float alpha = (rstop > 0.001)? (0.5 - r / (rstop * 2.0)) : 1.0;\n    alpha = smoothstep(0.0, 1.0, alpha) * palpha;\n    \n    gl_FragColor = vec4(col * 0.5, alpha);\n}\n"
     
     pointFlower.program = createShader(
@@ -316,7 +316,9 @@ function createPointFlowers() {
     
     // paramerters: velocity[3], rotate[3]
     // console.log("FLOWERSSS", Math.floor(coverage*canvas.width*canvas.height/1000.0) );
-    pointFlower.numFlowers = Math.floor(coverage*canvas.width*canvas.height/2000.0);
+    // const gpuScore = parseInt(canvas.getAttribute("score"),10)|| 60;
+
+    pointFlower.numFlowers = Math.min(Math.floor(coverage*canvas.width*canvas.height/3000.0), 400);
     pointFlower.particles = new Array(pointFlower.numFlowers);
     // vertex attributes {position[3], euler_xyz[3], size[1]}
     pointFlower.dataArray = new Float32Array(pointFlower.numFlowers * (3 + 3 + 2));
@@ -756,10 +758,48 @@ function render() {
 }
 
 var animating = false;
+setTimeout(()=>{
+    if(!animating && document.getElementById("bg-button").firstChild){
+        setTimeout(()=>{
+            const toRaise = document.getElementById("bio")
+            if(toRaise){
+                toRaise.classList.add("raised")
+            }
+            document.getElementById("bg-button").style.opacity=1
+        }, 250)
+
+        toggleAnimation(document.getElementById("bg-button"))
+
+        let opacity = 0;
+        var increaseOpacity = setInterval(()=>{
+            if(opacity<=100){
+                canvas.style.opacity = opacity/100.0;
+                opacity++;
+            }
+            else{
+                clearInterval(increaseOpacity)
+            }
+        }, 25)
+
+        setTimeout(()=>{
+            let blur = 30;
+            var reduceBlur = setInterval(()=>{
+                if(blur>=2){
+                    canvas.style.filter = `saturate(150%) blur(${blur}px)`;
+                    blur--;
+                }
+                else{
+                    clearInterval(reduceBlur)
+                }
+            }, 1500/25)
+        },1000)
+
+    }
+}, 750)
 function toggleAnimation(elm) {
     animating ^= true;
     if(animating) animate();
-    if(elm.firstChild) {
+    if(elm && elm.firstChild) {
         elm.firstChild.classList.toggle('play')
         elm.firstChild.classList.toggle('pause')
     }
@@ -808,19 +848,6 @@ window.addEventListener('load', function(e) {
     animate();
     gl.clearColor(0.76/2, 0.84/2, 0.91/2, 0.5);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    // let counter = 0
-    // var loop = setInterval(()=>{
-    //     if(counter<248){
-    //         animate();
-    //         counter++;
-    //         console.log("CALLED COUNTER")
-    //     }
-    //     else{
-    //         gl.clearColor(0.76/2, 0.84/2, 0.91/2, 0);
-    //         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    //         this.clearInterval(loop)
-    //     }
-    // }, 1000/60)
 
 });
 
@@ -828,3 +855,32 @@ window.addEventListener('load', function(e) {
 (function (w, r) {
     w['r'+r] = w['r'+r] || w['webkitR'+r] || w['mozR'+r] || w['msR'+r] || w['oR'+r] || function(c){ w.setTimeout(c, 1000 / 60); };
 })(window, 'requestAnimationFrame');
+
+var toggledOffAuto=false;
+document.addEventListener( 'visibilitychange' , ()=>{
+    if (document.hidden) {
+        if(animating){
+            toggledOffAuto=true
+            console.log("Toggled off")
+            toggleAnimation(document.getElementById("bg-button"))
+        }
+    }
+});
+
+if(!location.href.includes('localhost')){
+window.addEventListener('blur', ()=>{
+    if(animating){
+        toggledOffAuto=true
+        console.log("Toggled off")
+        toggleAnimation(document.getElementById("bg-button"))
+    }
+});
+
+window.addEventListener('focus', ()=>{
+    if(!animating && toggledOffAuto){
+        toggleAnimation(document.getElementById("bg-button"))
+        toggledOffAuto=false;
+    }
+});
+}
+

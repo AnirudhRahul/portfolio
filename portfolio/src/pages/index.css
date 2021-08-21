@@ -8,9 +8,19 @@
     }
 }
 
-.bio{
+#bio{
     padding-top: 0rem;
     padding-bottom: 0rem;
     padding-left: 0.1rem;
     padding-right: 0.1rem;
+    border-radius: 2px;
+
+    transition: 1s ease-out;
+}
+
+.raised{
+    padding: 0.5rem !important;
+    z-index: 2;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    backdrop-filter: blur(25px) saturate(90%);
 }

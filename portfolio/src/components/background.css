@@ -2,5 +2,20 @@ canvas{
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-color: #c2d7e9;
+    position:fixed; top:0;left:0;
+    filter: saturate(150%) blur(30px);
+    opacity: 0;
+    /* background-color: #c2d7e9; */
+}
+
+#bg-button{
+    opacity: 0;
+    position:fixed; 
+    bottom: 0.6em;
+    right: 0.5em;
+    transition: 1.5s ease-in;
+}
+
+#bg-button:hover{
+    cursor: pointer
 }

@@ -7,6 +7,7 @@ import Dynamic from 'containers/Dynamic'
 import {Container, Divider, Icon, IconGroup, Menu, Segment} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 
+import Background from './components/Background.js'
 import './app.css'
 
 // Any routes that start with 'dynamic' will be treated as non-static routes
@@ -15,31 +16,35 @@ addPrefetchExcludes(['dynamic'])
 function App() {
   return (
     <Root>
+      <Background></Background>
       <Container text className="centered">
+
       <Menu pointing secondary>
-        <Menu.Item
-          id = "me"
-          name='Anirudh Rahul'
-          onClick={()=>{location.href="/"}}
-        />
+        <Link to="/">
+          <Menu.Item
+            id = "me"
+            name='Anirudh Rahul'
+          />
+        </Link>
 
         <Menu.Menu position='right'>
+        <Link to="/projects">
           <Menu.Item
             name='Projects'
-            // active={activeItem === 'messages'}
-            onClick={()=>{location.href="/projects"}}
             />
+        </Link>
           <Menu.Item
             name='Graphs'
-            // active={activeItem === 'friends'}
             onClick={()=>{location.href="/graphs"}}
           />
         </Menu.Menu>
       </Menu>
+
+
       <Suspense fallback="loading">
         <Routes/>
       </Suspense>
-    
+
       </Container>
     </Root>
   )

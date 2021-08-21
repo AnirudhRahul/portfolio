@@ -8,7 +8,7 @@ import './footer.css'
 function Footer(props) {
     const [email, setEmail] = useState('');
     return (
-        <div centered="true" class="footer-divider">
+        <div centered="true" className="footer-divider">
 
         <div className="icon-row">
             <a href="https://github.com/AnirudhRahul">
