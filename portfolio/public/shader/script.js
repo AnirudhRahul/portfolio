@@ -295,13 +295,14 @@ BlossomParticle.prototype.update = function (dt, et) {
     this.euler[2] += this.rotation[2] * dt;
 };
 
+var coverage = 0.3;
 function createPointFlowers() {
     // get point sizes
     var prm = gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE);
     renderSpec.pointSize = {'min':prm[0], 'max':prm[1]};
     
-    var vtxsrc = document.getElementById("sakura_point_vsh").textContent;
-    var frgsrc = document.getElementById("sakura_point_fsh").textContent;
+    var vtxsrc = "\nuniform mat4 uProjection;\nuniform mat4 uModelview;\nuniform vec3 uResolution;\nuniform vec3 uOffset;\nuniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius\nuniform vec3 uFade; //x:start distance, y:half distance, z:near fade start\n\nattribute vec3 aPosition;\nattribute vec3 aEuler;\nattribute vec2 aMisc; //x:size, y:fade\n\nvarying vec3 pposition;\nvarying float psize;\nvarying float palpha;\nvarying float pdist;\n\n//varying mat3 rotMat;\nvarying vec3 normX;\nvarying vec3 normY;\nvarying vec3 normZ;\nvarying vec3 normal;\n\nvarying float diffuse;\nvarying float specular;\nvarying float rstop;\nvarying float distancefade;\n\nvoid main(void) {\n    // Projection is based on vertical angle\n    vec4 pos = uModelview * vec4(aPosition + uOffset, 1.0);\n    gl_Position = uProjection * pos;\n    gl_PointSize = aMisc.x * uProjection[1][1] / -pos.z * uResolution.y * 0.5;\n    \n    pposition = pos.xyz;\n    psize = aMisc.x;\n    pdist = length(pos.xyz);\n    palpha = smoothstep(0.0, 1.0, (pdist - 0.1) / uFade.z);\n    \n    vec3 elrsn = sin(aEuler);\n    vec3 elrcs = cos(aEuler);\n    mat3 rotx = mat3(\n        1.0, 0.0, 0.0,\n        0.0, elrcs.x, elrsn.x,\n        0.0, -elrsn.x, elrcs.x\n    );\n    mat3 roty = mat3(\n        elrcs.y, 0.0, -elrsn.y,\n        0.0, 1.0, 0.0,\n        elrsn.y, 0.0, elrcs.y\n    );\n    mat3 rotz = mat3(\n        elrcs.z, elrsn.z, 0.0, \n        -elrsn.z, elrcs.z, 0.0,\n        0.0, 0.0, 1.0\n    );\n    mat3 rotmat = rotx * roty * rotz;\n    normal = rotmat[2];\n    \n    mat3 trrotm = mat3(\n        rotmat[0][0], rotmat[1][0], rotmat[2][0],\n        rotmat[0][1], rotmat[1][1], rotmat[2][1],\n        rotmat[0][2], rotmat[1][2], rotmat[2][2]\n    );\n    normX = trrotm[0];\n    normY = trrotm[1];\n    normZ = trrotm[2];\n    \n    const vec3 lit = vec3(0.6917144638660746, 0.6917144638660746, -0.20751433915982237);\n    \n    float tmpdfs = dot(lit, normal);\n    if(tmpdfs < 0.0) {\n        normal = -normal;\n        tmpdfs = dot(lit, normal);\n    }\n    diffuse = 1.0 + tmpdfs/2.0;\n    \n    vec3 eyev = normalize(-pos.xyz);\n    if(dot(eyev, normal) > 0.0) {\n        vec3 hv = normalize(eyev + lit);\n        specular = pow(max(dot(hv, normal), 0.0), 50.0)/2.0;\n    }\n    else {\n        specular = 0.0;\n    }\n    \n    rstop = clamp((abs(pdist - uDOF.x) - uDOF.y) / uDOF.z, 0.0, 1.0);\n    //rstop = pow(rstop, 1.0);\n    //-0.69315 = ln(0.5)\n    //distancefade = min(1.0, exp((uFade.x - pdist) * 0.69315 / uFade.y));\n    distancefade = 1.0;\n}\n"
+    var frgsrc = "\n#ifdef GL_ES\n//precision mediump float;\nprecision highp float;\n#endif\n\nuniform vec3 uDOF;  //x:focus distance, y:focus radius, z:max radius\nuniform vec3 uFade; //x:start distance, y:half distance, z:near fade start\n\nconst vec3 fadeCol = vec3(0.08, 0.03, 0.06);\n\nvarying vec3 pposition;\nvarying float psize;\nvarying float palpha;\nvarying float pdist;\n\n//varying mat3 rotMat;\nvarying vec3 normX;\nvarying vec3 normY;\nvarying vec3 normZ;\nvarying vec3 normal;\n\nvarying float diffuse;\nvarying float specular;\nvarying float rstop;\nvarying float distancefade;\n\nfloat ellipse(vec2 p, vec2 o, vec2 r) {\n    vec2 lp = (p - o) / r;\n    return length(lp) - 1.0;\n}\n\nvoid main(void) {\n    vec3 p = vec3(gl_PointCoord - vec2(0.5, 0.5), 0.0) * 2.5;\n    vec3 d = vec3(0.0, 0.0, -1.0);\n    float nd = normZ.z; //dot(-normZ, d);\n    if(abs(nd) < 0.0001) discard;\n    \n    float np = dot(normZ, p);\n    vec3 tp = p + d * np / nd;\n    vec2 coord = vec2(dot(normX, tp), dot(normY, tp));\n    \n    //angle = 15 degree\n    const float flwrsn = 0.258819045102521;\n    const float flwrcs = 0.965925826289068;\n    mat2 flwrm = mat2(flwrcs, -flwrsn, flwrsn, flwrcs);\n    vec2 flwrp = vec2(abs(coord.x), coord.y) * flwrm;\n    \n    float r;\n    if(flwrp.x < 0.0) {\n        r = ellipse(flwrp, vec2(0.065, 0.024) * 0.5, vec2(0.36, 0.96) * 0.5);\n    }\n    else {\n        r = ellipse(flwrp, vec2(0.065, 0.024) * 0.5, vec2(0.58, 0.96) * 0.5);\n    }\n    \n    if(r > rstop) discard;\n    \n    vec3 col = mix(vec3(1.0, 0.8, 0.75), vec3(1.0, 0.9, 0.87), r);\n\n    float grady = mix(0.0, 1.0, pow(coord.y * 0.5 + 0.5, 0.35));\n    //grady = 1.0;\n    col *= vec3(1.0, grady, grady);\n    col *= mix(0.8, 1.0, pow(abs(coord.x), 0.3));\n    col = col * diffuse + specular;\n    \n    col = mix(fadeCol, col, distancefade);\n    \n    float alpha = (rstop > 0.001)? (0.5 - r / (rstop * 2.0)) : 1.0;\n    alpha = smoothstep(0.0, 1.0, alpha) * palpha;\n    \n    gl_FragColor = vec4(col * 0.5, alpha);\n}\n"
     
     pointFlower.program = createShader(
         vtxsrc, frgsrc,
@@ -314,7 +315,8 @@ function createPointFlowers() {
     pointFlower.fader = Vector3.create(0.0, 10.0, 0.0);
     
     // paramerters: velocity[3], rotate[3]
-    pointFlower.numFlowers = 100;
+    // console.log("FLOWERSSS", Math.floor(coverage*canvas.width*canvas.height/1000.0) );
+    pointFlower.numFlowers = Math.floor(coverage*canvas.width*canvas.height/2000.0);
     pointFlower.particles = new Array(pointFlower.numFlowers);
     // vertex attributes {position[3], euler_xyz[3], size[1]}
     pointFlower.dataArray = new Float32Array(pointFlower.numFlowers * (3 + 3 + 2));
@@ -341,7 +343,7 @@ function initPointFlowers() {
     
     pointFlower.fader.x = pointFlower.area.z/2; //env fade start
     pointFlower.fader.y = pointFlower.area.z; //env fade half
-    pointFlower.fader.z = 0;  //near fade start
+    pointFlower.fader.z = 0.1;  //near fade start
     
     //particles
     var PI2 = Math.PI * 2.0;
@@ -370,7 +372,7 @@ function initPointFlowers() {
         tmpprtcl.setPosition(
             symmetryrand() * pointFlower.area.x,
             symmetryrand() * pointFlower.area.y,
-            symmetryrand() * pointFlower.area.z+10000
+            symmetryrand() * pointFlower.area.z
         );
         
         //euler
@@ -575,23 +577,23 @@ function createEffectLib() {
     
     var vtxsrc, frgsrc;
     //common
-    var cmnvtxsrc = document.getElementById("fx_common_vsh").textContent;
+    var cmnvtxsrc = "\nuniform vec3 uResolution;\nattribute vec2 aPosition;\n\nvarying vec2 texCoord;\nvarying vec2 screenCoord;\n\nvoid main(void) {\n    gl_Position = vec4(aPosition, 0.0, 1.0);\n    texCoord = aPosition.xy * 0.5 + vec2(0.5, 0.5);\n    screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);\n}\n";
     
     //background
-    frgsrc = document.getElementById("bg_fsh").textContent;
-    effectLib.sceneBg = createEffectProgram(cmnvtxsrc, frgsrc, ['uTimes'], null);
+    // frgsrc = document.getElementById("bg_fsh").textContent;
+    // effectLib.sceneBg = createEffectProgram(cmnvtxsrc, frgsrc, ['uTimes'], null);
     
     // make brightpixels buffer
-    frgsrc = document.getElementById("fx_brightbuf_fsh").textContent;
+    frgsrc = "\n#ifdef GL_ES\n//precision mediump float;\nprecision highp float;\n#endif\nuniform sampler2D uSrc;\nuniform vec2 uDelta;\n\nvarying vec2 texCoord;\nvarying vec2 screenCoord;\n\nvoid main(void) {\n    vec4 col = texture2D(uSrc, texCoord);\n    gl_FragColor = vec4(col.rgb * 2.0 - vec3(0.5), 0);\n}\n";
     effectLib.mkBrightBuf = createEffectProgram(cmnvtxsrc, frgsrc, null, null);
     
     // direction blur
-    frgsrc = document.getElementById("fx_dirblur_r4_fsh").textContent;
-    effectLib.dirBlur = createEffectProgram(cmnvtxsrc, frgsrc, ['uBlurDir'], null);
+    // frgsrc = document.getElementById("fx_dirblur_r4_fsh").textContent;
+    // effectLib.dirBlur = createEffectProgram(cmnvtxsrc, frgsrc, ['uBlurDir'], null);
     
     //final composite
-    vtxsrc = document.getElementById("pp_final_vsh").textContent;
-    frgsrc = document.getElementById("pp_final_fsh").textContent;
+    vtxsrc = "\nuniform vec3 uResolution;\nattribute vec2 aPosition;\nvarying vec2 texCoord;\nvarying vec2 screenCoord;\nvoid main(void) {\n    gl_Position = vec4(aPosition, 0.0, 1.0);\n    texCoord = aPosition.xy * 0.5 + vec2(0.5, 0.5);\n    screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);\n}\n";
+    frgsrc = "\n#ifdef GL_ES\n//precision mediump float;\nprecision highp float;\n#endif\nuniform sampler2D uSrc;\nuniform sampler2D uBloom;\nuniform vec2 uDelta;\nvarying vec2 texCoord;\nvarying vec2 screenCoord;\nvoid main(void) {\n    vec4 srccol = texture2D(uSrc, texCoord) * 2.0;\n    vec4 bloomcol = texture2D(uBloom, texCoord);\n    vec4 col;\n    col = srccol + bloomcol * (vec4(1.0) + srccol);\n    col *= smoothstep(1.0, 0.0, pow(length((texCoord - vec2(0.5)) * 2.0), 1.2) * 0.5);\n    col = pow(col, vec4(0.45454545454545)); //(1.0 / 2.2)\n    \n    gl_FragColor = vec4(srccol.rgb, 1.0);\n    gl_FragColor.a = 1.0;\n}\n";
     effectLib.finalComp = createEffectProgram(vtxsrc, frgsrc, ['uBloom'], null);
 }
 
@@ -642,23 +644,23 @@ function renderPostProcess() {
     
     // make bloom
     // likely not needed since we may heavily blur anyway
-    if(bloom){
-        for(var i = 0; i < 2; i++) {
-            var p = 1.5 + 1 * i;
-            var s = 2.0 + 1 * i;
-            bindRT(renderSpec.wHalfRT1, true);
-            useEffect(effectLib.dirBlur, renderSpec.wHalfRT0);
-            gl.uniform4f(effectLib.dirBlur.program.uniforms.uBlurDir, p, 0.0, s, 0.0);
-            drawEffect(effectLib.dirBlur);
-            unuseEffect(effectLib.dirBlur);
+    // if(bloom){
+    //     for(var i = 0; i < 2; i++) {
+    //         var p = 1.5 + 1 * i;
+    //         var s = 2.0 + 1 * i;
+    //         bindRT(renderSpec.wHalfRT1, true);
+    //         useEffect(effectLib.dirBlur, renderSpec.wHalfRT0);
+    //         gl.uniform4f(effectLib.dirBlur.program.uniforms.uBlurDir, p, 0.0, s, 0.0);
+    //         drawEffect(effectLib.dirBlur);
+    //         unuseEffect(effectLib.dirBlur);
             
-            bindRT(renderSpec.wHalfRT0, true);
-            useEffect(effectLib.dirBlur, renderSpec.wHalfRT1);
-            gl.uniform4f(effectLib.dirBlur.program.uniforms.uBlurDir, 0.0, p, 0.0, s);
-            drawEffect(effectLib.dirBlur);
-            unuseEffect(effectLib.dirBlur);
-        }
-    }
+    //         bindRT(renderSpec.wHalfRT0, true);
+    //         useEffect(effectLib.dirBlur, renderSpec.wHalfRT1);
+    //         gl.uniform4f(effectLib.dirBlur.program.uniforms.uBlurDir, 0.0, p, 0.0, s);
+    //         drawEffect(effectLib.dirBlur);
+    //         unuseEffect(effectLib.dirBlur);
+    //     }
+    // }
     
     //display
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
@@ -716,10 +718,14 @@ var lastResize = 0;
 function onResize(e) {
     const now = Date.now()
     lastResize = now
+
     setTimeout(()=>{
         if(now==lastResize){
-            makeCanvasFullScreen();
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
             setViewports();
+            createScene();
+            // initScene();
             if(sceneStandBy) {
                 initScene();
             }
@@ -749,14 +755,16 @@ function render() {
     renderScene();
 }
 
-var animating = true;
+var animating = false;
 function toggleAnimation(elm) {
     animating ^= true;
     if(animating) animate();
-    if(elm) {
-        elm.innerHTML = animating? "Stop":"Start";
+    if(elm.firstChild) {
+        elm.firstChild.classList.toggle('play')
+        elm.firstChild.classList.toggle('pause')
     }
 }
+document.getElementById("bg-button").addEventListener("click", function(){toggleAnimation(this)});
 
 var bloom = true;
 function toggleBloom() {
@@ -777,16 +785,9 @@ function animate() {
     render();
 }
 
-function makeCanvasFullScreen() {
-	fullw = window.innerWidth;
-	fullh = window.innerHeight;
-	canvas.width = fullw;
-	canvas.height = fullh;
-}
-
 window.addEventListener('load', function(e) {
+    console.log("CALLED LOAD EVENT LISTERNER")
     try {
-        makeCanvasFullScreen();
         gl = canvas.getContext('experimental-webgl');
     } catch(e) {
         alert("WebGL not supported." + e);
@@ -796,6 +797,8 @@ window.addEventListener('load', function(e) {
     
     window.addEventListener('resize', onResize);
     
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     setViewports();
     createScene();
     initScene();
@@ -803,6 +806,22 @@ window.addEventListener('load', function(e) {
     timeInfo.start = new Date();
     timeInfo.prev = timeInfo.start;
     animate();
+    gl.clearColor(0.76/2, 0.84/2, 0.91/2, 0.5);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    // let counter = 0
+    // var loop = setInterval(()=>{
+    //     if(counter<248){
+    //         animate();
+    //         counter++;
+    //         console.log("CALLED COUNTER")
+    //     }
+    //     else{
+    //         gl.clearColor(0.76/2, 0.84/2, 0.91/2, 0);
+    //         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    //         this.clearInterval(loop)
+    //     }
+    // }, 1000/60)
+
 });
 
 //set window.requestAnimationFrame
