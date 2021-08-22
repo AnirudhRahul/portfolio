@@ -33,7 +33,7 @@ export default () => (
     <Project 
       title="HackMIT Puzzle"
       img="/puzzle.png"
-      desc="Made the final HackMIT 2021 puzzle, where puzzlers have to exploit a smart contract."
+      desc="Made the final HackMIT 2021 puzzle, where puzzlers have to solve a minigame running on a smart contract"
       link="https://chadtomoon.hackwsb.net"
       ethLink="https://ropsten.etherscan.io/address/0x5fae83fFc4e3853a5E5a2AA7392f6E936a7b6AB1"
       skills={["Solidity", "Node.js", "Redis" ]}/>
@@ -41,14 +41,14 @@ export default () => (
     <Project 
       title="Media Server"
       img="/aniserve.png" 
-      desc="Developed and deployed a media server, which can automatically torrent new content and upload it to an S3 bucket, in addition to automatically creating thumbnails and titles."
+      desc="Developed and deployed a media server, which can automatically torrent new content and upload it to an S3 bucket, in addition to automatically creating thumbnails and titles"
       githubLink="https://github.com/AnirudhRahul/Anime-Server"
       link="https://aniserveani.com" 
       skills={["Node.js", "S3", "Nginx", "CentOS"]}/>
 
     <Project 
       title="IntroMark"
-      desc="Created a C++ script that uses audio hashing and suffix arrays(to find repeating substrings) in order to find intros/endings for tv shows."
+      desc="Created a C++ script that uses audio hashing and suffix arrays(to find repeating substrings) in order to find intros/endings for tv shows"
       githubLink="https://github.com/AnirudhRahul/IntroMark"
       skills={["C++", "Suffix Arrays"]}/>
     

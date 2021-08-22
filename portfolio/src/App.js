@@ -33,10 +33,12 @@ function App() {
             name='Projects'
             />
         </Link>
+        <Link to="/graphs">
           <Menu.Item
-            name='Graphs'
-            onClick={()=>{location.href="/graphs"}}
-          />
+              name='Graphs'
+            />
+        </Link>
+
         </Menu.Menu>
       </Menu>
 

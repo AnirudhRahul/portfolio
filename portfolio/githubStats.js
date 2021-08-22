@@ -35,11 +35,7 @@ async function getCommits(){
             
             let last = commits[commits.length-1];
 
-            if(!validYears.includes(last.date.substring(0,4)) || pageIndex==10){
-                while(!validYears.includes(last.date.substring(0,4))){
-                    commits.pop()
-                    last = commits[commits.length-1];
-                }
+            if(pageIndex==10){
                 console.log("Got list of commits")
                 fs.writeFileSync("githubStats.json", JSON.stringify(commits))
                 return commits;
@@ -74,10 +70,10 @@ const extMapping = {
   
     '.md': "Markdown",
   
-    '.html': "HTML",
+    '.html': "HTML/CSS",
   
-    '.css': "CSS",
-    '.scss': "CSS",
+    '.css': "HTML/CSS",
+    '.scss': "HTML/CSS",
   
     '.txt': "Data",
     '.json': "Data",
@@ -93,14 +89,19 @@ const extMapping = {
   
 }
 
-module.exports.getDiffsByDay = async function(){
+module.exports.getDiffsByDay = async function(fetchCommits){
     // let commit_list = await getCommits();
-    // let commit_list = JSON.parse(fs.readFileSync("githubStats.json"))
-    // for(let index in commit_list){
-    //     commit_list[index].diffs = await getCommitDiffs(commit_list[index].url)        
-    // }
-    // fs.writeFileSync("githubStatsWithDiffs.json", JSON.stringify(commit_list))
-    let commit_list = JSON.parse(fs.readFileSync("githubStatsWithDiffs.json"))
+    let commit_list = JSON.parse(fs.readFileSync("githubStats.json"))
+    if(fetchCommits){
+        for(let index in commit_list){
+            commit_list[index].diffs = await getCommitDiffs(commit_list[index].url)        
+        }
+        fs.writeFileSync("githubStatsWithDiffs.json", JSON.stringify(commit_list))
+    }
+    else{
+        commit_list = JSON.parse(fs.readFileSync("githubStatsWithDiffs.json"))
+    }
+
     let sum_diffs = {}
     for(const {diffs} of commit_list){
         for(const ext in diffs){
@@ -179,6 +180,9 @@ async function getCommitDiffs(url){
     const req = await octokit.request(`GET ${url}`)
     const diffs = {}
     for(const file of req.data.files){
+        if(file.status!='modified'){
+            continue;
+        }
         if(file.additions==0){
             continue;
         }
@@ -231,5 +235,9 @@ async function getPage(num){
 }
 
 
-// run()
-// .catch(console.error)
+
+
+if (require.main === module) {
+    module.exports.getDiffsByDay(true)
+    .catch(console.error)
+}

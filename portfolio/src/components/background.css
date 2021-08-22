@@ -5,7 +5,6 @@ canvas{
     position:fixed; top:0;left:0;
     filter: saturate(150%) blur(30px);
     opacity: 0;
-    /* background-color: #c2d7e9; */
 }
 
 #bg-button{

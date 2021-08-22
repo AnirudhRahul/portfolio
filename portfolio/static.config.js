@@ -11,7 +11,7 @@ export default {
     // const { data: posts } = await axios.get(
     //   'https://jsonplaceholder.typicode.com/posts'
     // )
-    const github_data = await gh_stats.getDiffsByDay()
+    const github_data = await gh_stats.getDiffsByDay(false)
 
     return [{
       path: '/graphs',
