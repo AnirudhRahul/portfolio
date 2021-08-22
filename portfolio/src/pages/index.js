@@ -17,7 +17,7 @@ export default () => (
       </p>
 
       <p>
-        One of the cooler things I picked up this year was writing smart contracts for the ETH blockchain. <br/>I also ended up making a smart contract puzzle for HackMIT's annual <a href="https://my.hackwsb.net/">admissions puzzle</a>, where puzzlers have to solve a NP-hard minigame running on the blockchain.
+        One of the cooler things I picked up this year was writing smart contracts for the ETH blockchain. <br/>I also ended up making a smart contract puzzle for HackMIT's annual <a href="https://my.hackwsb.net/">admissions puzzle</a>, where puzzlers have to solve a NP-hard minigame running on the ethereum blockchain.
       </p>
 
       <p>

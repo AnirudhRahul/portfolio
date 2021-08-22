@@ -18,7 +18,7 @@ class Background extends Component {
 
     async componentDidMount() {
         const gpuTier = await getGPUTier();
-        let useWebgl = !gpuTier.isMobile && gpuTier.fps >= 100 && false
+        let useWebgl = gpuTier.fps >= 60
         if(location.href.endsWith("force")){
             useWebgl=true;
         }
