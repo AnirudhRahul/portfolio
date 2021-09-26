@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'components/Router'
 import {Image, Container} from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import './index.css'
@@ -17,7 +18,7 @@ export default () => (
       </p>
 
       <p>
-        One of the cooler things I picked up this year was writing smart contracts for the ETH blockchain. <br/>I also ended up making a smart contract puzzle for HackMIT's annual <a href="https://my.hackwsb.net/">admissions puzzle</a>, where puzzlers have to solve a NP-hard minigame running on the ethereum blockchain.
+        One of the cooler things I picked up this year was writing smart contracts for the ETH blockchain, which I used to make a <Link to="/projects">puzzle</Link> for Hack this year!
       </p>
 
       <p>

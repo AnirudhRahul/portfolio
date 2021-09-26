@@ -51,6 +51,19 @@ export default () => (
       desc="Created a C++ script that uses audio hashing and suffix arrays(to find repeating substrings) in order to find intros/endings for tv shows"
       githubLink="https://github.com/AnirudhRahul/IntroMark"
       skills={["C++", "Suffix Arrays"]}/>
+
+    <Project 
+      title="Student Delegates Website"
+      desc="Designed graphics and layout for the FAMAT Student Delegates website"
+      link="http://www.famatdelegates.org/"
+      skills={["Wordpress"]}/>
+
+    <Project
+      title="Famat Bubbler"
+      desc="Created a javascript program to automatically generate a pdf of scantrons, with IDs and names filled in for students."
+      githubLink="https://github.com/AnirudhRahul/FAMATBubbler"
+      skills={["Javascript"]}/>
+
     
     <Footer/>
   </Container>
