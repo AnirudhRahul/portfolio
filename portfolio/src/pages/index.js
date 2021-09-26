@@ -8,7 +8,7 @@ import Footer from '../components/Footer.js'
 export default () => (
   <Container>
     <Container text id="bio" className={process.browser && document.getElementById("bg-button").firstChild && window.getComputedStyle(document.getElementById("bg-button")).opacity==1?"raised":""}>
-    <Image src="/headshot.jpeg" size='medium' floated='right' circular className='headshot'/>
+    <Image src="/headshot.jpg" size='medium' floated='right' circular className='headshot'/>
       <p>
         Hey there! I'm Anirudh, and I'm a 24' at MIT studying Computer Science and Math. 
       </p>
