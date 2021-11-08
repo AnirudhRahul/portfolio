@@ -40,7 +40,7 @@ export default {
       <Head>
       <meta charSet="UTF-8" />
       <title>Anirudh Rahul | Web Dev</title>
-      <meta name="description" content="Hey I'm Ani a 24' at MIT who loves CS and is dev head at HackMIT!"></meta>
+      <meta name="description" content="Hey I'm Ani a 24 at MIT who loves CS and is dev head at HackMIT!"></meta>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
