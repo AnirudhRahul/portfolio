@@ -12,11 +12,11 @@ export default function ProjectsPage(){
 
         <Container className="raised tight">
             
-            <p>Hey there if you like the cool shaders in the background then you&apos;ve come to the right place!</p>
+            <p>If you like the cool shaders in the background then you&apos;ve come to the right place!</p>
 
-            <p>If you want just want to watch the sakura fall you can go <Link href="/bg">here</Link> </p>
+            <p>To watch the sakura fall uninteruppted you can go <Link href="/bg">here</Link> </p>
 
-            <p> If you&apos;re interested in learning more about these shaders or WebGL in general I&apos;d reccomend these resources:</p>
+            <p> To learn more about these shaders or WebGL in general I&apos;d reccomend these resources:</p>
 
             <List bulleted >
                 <List.Item>

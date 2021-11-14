@@ -31,7 +31,8 @@ export default function ProjectsPage(){
       <Project 
         title="HackMIT Puzzle"
         img="/puzzle.png"
-        desc="Made the final HackMIT 2021 puzzle, where puzzlers have to solve a minigame running on a smart contract"
+        desc="Made a algorithmn based minigame smart contract, for HackMIT 2021's final puzzle"
+
         link="https://chadtomoon.hackwsb.net"
         ethLink="https://ropsten.etherscan.io/address/0x5fae83fFc4e3853a5E5a2AA7392f6E936a7b6AB1"
         skills={["Solidity", "Node.js", "Redis" ]}/>
