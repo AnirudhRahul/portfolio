@@ -10,8 +10,8 @@ export default function Project(props) {
             {
                 props.img &&
                 <div className={styles.left}>
-                    <Image className={styles.image}>
-                        <NextImage src={props.img}/>
+                    <Image>
+                        <NextImage className={styles.image} src={props.img}/>
                     </Image>
                 </div>
             }
