@@ -1,6 +1,7 @@
 import {Container, Header, Segment} from 'semantic-ui-react'
 import Footer from '../components/Footer.js'
 import dynamic from 'next/dynamic'
+import Head from 'next/head';
     
 const ReactApexChart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
@@ -108,6 +109,10 @@ function Graphs(props) {
 
     return (
         <Container textAlign='center'> 
+
+            <Head>
+                <meta name="description" content="Hey I'm Ani here are some cool graphs of my stats!"></meta>
+            </Head>
             <h1>Graphs</h1>
             Here are some fun graphs of my stats!
 

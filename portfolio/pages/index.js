@@ -12,7 +12,7 @@ export default function Home() {
       </Head>
 
       <Container>
-        <Container text id="bio" className="raised">
+        <Container text id="bio" className="">
         <Image src="/optimized-headshot.jpeg" size='medium' floated='right' alt='Anirudh Rahul' circular className='headshot'/>
           <p>
             Hey there! I&apos;m Anirudh, and I&apos;m a &apos;24 at MIT studying Computer Science and Math. 

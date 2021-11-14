@@ -780,7 +780,11 @@ setTimeout(()=>{
             if(toRaise){
                 toRaise.classList.add("raised")
             }
-            document.getElementById("bg-button").style.opacity=1
+            if(location.href.endsWith("background"))
+                document.getElementById("bg-button").style.opacity=0
+            else
+                document.getElementById("bg-button").style.opacity=1
+
         }, 250)
 
         toggleAnimation(document.getElementById("bg-button"))

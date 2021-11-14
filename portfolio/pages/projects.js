@@ -1,11 +1,14 @@
 import {Container} from 'semantic-ui-react'
 import Project from '../components/Project.js'
 import Footer from '../components/Footer.js'
-
+import Head from 'next/head';
 
 export default function ProjectsPage(){
   return (
     <Container textAlign='center'> 
+      <Head>
+        <meta name="description" content="Hey I'm Ani here are some of my open source projects you can check out!"></meta>
+      </Head>
       <h1>Projects</h1>
       Here are some of my open source projects you can check out!
   
