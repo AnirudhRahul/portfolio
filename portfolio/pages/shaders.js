@@ -16,7 +16,6 @@ export default function ProjectsPage(){
 
             <p>If you want just want to watch the sakura fall you can go <Link href="/bg">here</Link> </p>
 
-
             <p> If you&apos;re interested in learning more about these shaders or WebGL in general I&apos;d reccomend these resources:</p>
 
             <List bulleted >
