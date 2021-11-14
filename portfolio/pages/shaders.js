@@ -2,7 +2,6 @@ import {Container, List} from 'semantic-ui-react'
 import Footer from '../components/Footer.js'
 import Head from 'next/head';
 import Link from 'next/link'
-import styles from "./shaders.module.css"
 
 export default function ProjectsPage(){
   return (
