@@ -1,6 +1,7 @@
 import {Container, List} from 'semantic-ui-react'
 import Footer from '../components/Footer.js'
 import Head from 'next/head';
+import Link from 'next/link'
 import styles from "./shaders.module.css"
 
 export default function ProjectsPage(){
@@ -12,12 +13,12 @@ export default function ProjectsPage(){
 
         <Container className="raised tight">
             
-            <p>Hey there if you like the cool shaders in the background then you've come to the right place!</p>
+            <p>Hey there if you like the cool shaders in the background then you&apos;ve come to the right place!</p>
 
-            <p>If you want just want to watch the sakura fall you can go <a href="/background">here</a> </p>
+            <p>If you want just want to watch the sakura fall you can go <Link href="/bg">here</Link> </p>
 
 
-            <p> If you&apos;re interested in learning more about these shaders or WebGL in general I'd reccomend these resources:</p>
+            <p> If you&apos;re interested in learning more about these shaders or WebGL in general I&apos;d reccomend these resources:</p>
 
             <List bulleted >
                 <List.Item>
