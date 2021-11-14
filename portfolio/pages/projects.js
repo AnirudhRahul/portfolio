@@ -2,7 +2,10 @@ import {Container} from 'semantic-ui-react'
 import Project from '../components/Project.js'
 import Footer from '../components/Footer.js'
 import Head from 'next/head';
-
+import opsuImg from "../public/opsuImg_small.png"
+import redditEmbedImg from "../public/redditEmbed.png"
+import puzzleImg from "../public/puzzle.png"
+import aniServeImg from "../public/aniserve.png"
 export default function ProjectsPage(){
   return (
     <Container textAlign='center'> 
@@ -14,7 +17,7 @@ export default function ProjectsPage(){
   
       <Project 
         title="Opsu!"
-        img="/opsuImg.png" 
+        img={opsuImg}
         desc="Primary maintainer for the android game Opsu! Used AWS Lambda and DynamoDB to make a scalable global leaderboard and auth solution for over 100k users"
         githubLink="https://github.com/AnirudhRahul/opsu-Android"
         playLink="https://play.google.com/store/apps/details?id=fluddokt.opsu.android&hl=en_US&gl=US" 
@@ -22,7 +25,7 @@ export default function ProjectsPage(){
   
       <Project 
         title="Reddit Embed"
-        img="https://raw.githubusercontent.com/AnirudhRahul/Reddit-Embed/master/preview.png" 
+        img={redditEmbedImg}
         desc="Developed a frontend javascript library to embed full reddit posts, including comments, on other sites"
         githubLink="https://github.com/AnirudhRahul/Reddit-Embed"
         link="https://anirudhrahul.github.io/Reddit-Embed/" 
@@ -30,7 +33,7 @@ export default function ProjectsPage(){
   
       <Project 
         title="HackMIT Puzzle"
-        img="/puzzle.png"
+        img={puzzleImg}
         desc="Made a algorithmn based minigame smart contract, for HackMIT 2021's final puzzle"
 
         link="https://chadtomoon.hackwsb.net"
@@ -39,7 +42,7 @@ export default function ProjectsPage(){
   
       <Project 
         title="Media Server"
-        img="/aniserve.png" 
+        img={aniServeImg} 
         desc="Developed and deployed a media server, which can automatically torrent new content and upload it to an S3 bucket, in addition to automatically creating thumbnails and titles"
         githubLink="https://github.com/AnirudhRahul/Anime-Server"
         link="https://aniserveani.com" 

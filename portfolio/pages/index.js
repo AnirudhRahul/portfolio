@@ -2,7 +2,9 @@ import Head from 'next/head'
 // import Image from 'next/image'
 import {Image, Container} from 'semantic-ui-react'
 import Footer from '../components/Footer'
+import HeadShot from '../public/optimized-headshot.jpeg'
 
+import NextImage from 'next/image'
 
 export default function Home() {
   return (
@@ -13,7 +15,9 @@ export default function Home() {
 
       <Container>
         <Container text id="bio" className="">
-        <Image src="/optimized-headshot.jpeg" size='medium' floated='right' alt='Anirudh Rahul' circular className='headshot'/>
+        <Image size='medium' floated='right' alt='Anirudh Rahul' circular className='headshot'>
+          <NextImage src={HeadShot}/>
+        </Image>
           <p>
             Hey there! I&apos;m Anirudh, and I&apos;m a &apos;24 at MIT studying Computer Science and Math. 
           </p>

@@ -1,10 +1,8 @@
 import React from 'react'
 import {Label, Segment, Popup, Icon, IconGroup, LabelGroup, Header, Image} from 'semantic-ui-react'
 import styles from './project.module.css'
+import NextImage from 'next/image'
 
-// export default function Project(){
-//     return <Segment raised className={styles.card}>Joe</Segment>
-// }
 
 export default function Project(props) {
     return (
@@ -12,7 +10,9 @@ export default function Project(props) {
             {
                 props.img &&
                 <div className={styles.left}>
-                    <Image src={props.img} className={styles.image} ></Image>
+                    <Image className={styles.image}>
+                        <NextImage src={props.img}/>
+                    </Image>
                 </div>
             }
             <div className={styles.right}>
