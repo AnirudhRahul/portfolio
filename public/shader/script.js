@@ -1,16 +1,7 @@
-// Client-side-only code
 // Utilities
 var canvas = document.getElementById("sakura");
 var Vector3 = {};
 var Matrix44 = {};
-var effectLib = {};
-try {
-    var gl = canvas.getContext('experimental-webgl');
-    console.log("Assigned WEBGL")
-} catch(e) {
-    alert("WebGL not supported." + e);
-    console.error(e);
-}
 Vector3.create = function(x, y, z) {
     return {'x':x, 'y':y, 'z':z};
 };
@@ -130,14 +121,6 @@ renderSpec.setSize = function(w, h) {
     renderSpec.halfArray[1] = renderSpec.halfHeight;
     renderSpec.halfArray[2] = renderSpec.halfWidth / renderSpec.halfHeight;
 };
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-timeInfo.start = new Date();
-timeInfo.prev = timeInfo.start;
-gl.clearColor(0.76/2, 0.84/2, 0.91/2, 0.5);
-gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
 function deleteRenderTarget(rt) {
     gl.deleteFramebuffer(rt.frameBuffer);
@@ -312,10 +295,7 @@ BlossomParticle.prototype.update = function (dt, et) {
     this.euler[2] += this.rotation[2] * dt;
 };
 
-function curve(){
-
-}
-
+var coverage = 0.3;
 function createPointFlowers() {
     // get point sizes
     var prm = gl.getParameter(gl.ALIASED_POINT_SIZE_RANGE);
@@ -334,10 +314,13 @@ function createPointFlowers() {
     pointFlower.offset = new Float32Array([0.0, 0.0, 0.0]);
     pointFlower.fader = Vector3.create(0.0, 10.0, 0.0);
     
-    const flowers = Math.floor(0.25*canvas.width*canvas.height/3000.0)
-    const minFlowers = 80
-    pointFlower.numFlowers = Math.max(flowers, minFlowers);
+    // paramerters: velocity[3], rotate[3]
+    // console.log("FLOWERSSS", Math.floor(coverage*canvas.width*canvas.height/1000.0) );
+    // const gpuScore = parseInt(canvas.getAttribute("score"),10)|| 60;
+
+    pointFlower.numFlowers = Math.min(Math.floor(coverage*canvas.width*canvas.height/3000.0), 400);
     pointFlower.particles = new Array(pointFlower.numFlowers);
+    // vertex attributes {position[3], euler_xyz[3], size[1]}
     pointFlower.dataArray = new Float32Array(pointFlower.numFlowers * (3 + 3 + 2));
     pointFlower.positionArrayOffset = 0;
     pointFlower.eulerArrayOffset = pointFlower.numFlowers * 3;
@@ -591,10 +574,12 @@ function unuseEffect(fxobj) {
     unuseShader(fxobj.program);
 }
 
+var effectLib = {};
 function createEffectLib() {
-    let vtxsrc, frgsrc;
+    
+    var vtxsrc, frgsrc;
     //common
-    let cmnvtxsrc = "\nuniform vec3 uResolution;\nattribute vec2 aPosition;\n\nvarying vec2 texCoord;\nvarying vec2 screenCoord;\n\nvoid main(void) {\n    gl_Position = vec4(aPosition, 0.0, 1.0);\n    texCoord = aPosition.xy * 0.5 + vec2(0.5, 0.5);\n    screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);\n}\n";
+    var cmnvtxsrc = "\nuniform vec3 uResolution;\nattribute vec2 aPosition;\n\nvarying vec2 texCoord;\nvarying vec2 screenCoord;\n\nvoid main(void) {\n    gl_Position = vec4(aPosition, 0.0, 1.0);\n    texCoord = aPosition.xy * 0.5 + vec2(0.5, 0.5);\n    screenCoord = aPosition.xy * vec2(uResolution.z, 1.0);\n}\n";
     
     //background
     // frgsrc = document.getElementById("bg_fsh").textContent;
@@ -810,7 +795,7 @@ setTimeout(()=>{
         },1000)
 
     }
-}, 1000)
+}, 750)
 function toggleAnimation(elm) {
     animating ^= true;
     if(animating) animate();
@@ -840,6 +825,32 @@ function animate() {
     render();
 }
 
+window.addEventListener('load', function(e) {
+    console.log("CALLED LOAD EVENT LISTERNER")
+    try {
+        gl = canvas.getContext('experimental-webgl');
+    } catch(e) {
+        alert("WebGL not supported." + e);
+        console.error(e);
+        return;
+    }
+    
+    window.addEventListener('resize', onResize);
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    setViewports();
+    createScene();
+    initScene();
+    
+    timeInfo.start = new Date();
+    timeInfo.prev = timeInfo.start;
+    animate();
+    gl.clearColor(0.76/2, 0.84/2, 0.91/2, 0.5);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+});
+
 //set window.requestAnimationFrame
 (function (w, r) {
     w['r'+r] = w['r'+r] || w['webkitR'+r] || w['mozR'+r] || w['msR'+r] || w['oR'+r] || function(c){ w.setTimeout(c, 1000 / 60); };
@@ -856,6 +867,7 @@ document.addEventListener( 'visibilitychange' , ()=>{
     }
 });
 
+if(!location.href.includes('localhost')){
 window.addEventListener('blur', ()=>{
     if(animating){
         toggledOffAuto=true
@@ -870,9 +882,5 @@ window.addEventListener('focus', ()=>{
         toggledOffAuto=false;
     }
 });
+}
 
-setViewports();
-createScene();
-initScene();
-animate();
-window.addEventListener('resize', onResize);

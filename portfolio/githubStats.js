@@ -90,8 +90,8 @@ const extMapping = {
 }
 
 module.exports.getDiffsByDay = async function(fetchCommits){
-    // let commit_list = await getCommits();
-    let commit_list = JSON.parse(fs.readFileSync("githubStats.json"))
+    let commit_list = await getCommits();
+    // let commit_list = JSON.parse(fs.readFileSync("githubStats.json"))
     if(fetchCommits){
         for(let index in commit_list){
             commit_list[index].diffs = await getCommitDiffs(commit_list[index].url)        
@@ -161,6 +161,8 @@ module.exports.getDiffsByDay = async function(fetchCommits){
     }
 
     console.log(commitsByDay)
+    fs.writeFileSync("commitsWithDiffs.json", JSON.stringify(commit_list))
+    fs.writeFileSync("stats.json", JSON.stringify(commitsByDay))
 
     return commitsByDay
 }
@@ -238,6 +240,6 @@ async function getPage(num){
 
 
 if (require.main === module) {
-    module.exports.getDiffsByDay(true)
+    module.exports.getDiffsByDay(false)
     .catch(console.error)
 }
