@@ -1,5 +1,6 @@
 import Head from 'next/head'
 // import Image from 'next/image'
+import { useState, useEffect } from 'react'
 import {Image, Container} from 'semantic-ui-react'
 import Footer from '../components/Footer'
 import HeadShot from '../public/optimized-headshot.jpeg'
@@ -7,6 +8,14 @@ import HeadShot from '../public/optimized-headshot.jpeg'
 import NextImage from 'next/image'
 
 export default function Home() {
+  const [raised, setRaised] = useState(false);
+
+
+
+  useEffect(() => {
+    setRaised(true)
+  }, []);
+
   return (
     <div>
       <Head>
@@ -14,7 +23,7 @@ export default function Home() {
       </Head>
 
       <Container>
-        <Container text id="bio" className="">
+        <Container text id="bio" className={raised ? "raised" : "no-transition"}>
         <Image size='medium' floated='right' alt='Anirudh Rahul' circular className='headshot'>
           <NextImage src={HeadShot}/>
         </Image>
