@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <meta name="description" content="Hey I'm Ani a 24 at MIT who loves CS and is dev head at HackMIT!"></meta>
+        <meta name="description" content="Hey I'm Ani a student at MIT who loves CS and is dev head at HackMIT!"></meta>
       </Head>
 
       <Container>
@@ -28,7 +28,7 @@ export default function Home() {
           <NextImage src={HeadShot}/>
         </Image>
           <p>
-            Hey there! I&apos;m Anirudh, and I&apos;m a &apos;24 at MIT studying Computer Science and Math. 
+            Hey there! I&apos;m Anirudh, and I&apos;m studying Computer Science and Math at MIT. 
           </p>
 
           <p>
