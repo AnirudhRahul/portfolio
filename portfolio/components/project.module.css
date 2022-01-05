@@ -1,0 +1,75 @@
+.card{
+    display: flex;
+    flex-direction: row !important;
+    background-color: #fafaff !important;
+    border: none !important;
+    font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+    max-width: 660px!important;
+    line-height: 1.5;
+    font-size: 1.14285714rem;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.title{
+    margin-top: 2px !important;
+    margin-bottom: 3px !important;
+    /* flex: 1; */
+}
+
+.labels{
+    flex: 1;
+}
+
+.fill-div{
+    flex-grow:1;
+    flex: 1;
+}
+
+.icons{
+    /* position:absolute;
+    bottom: 12px;
+    right: 12px; */
+    flex: 1;
+    margin-top:auto !important;
+    float:right;
+}
+
+.icon{
+    margin-right: 0 !important;
+    margin-left: 8px !important;
+}
+
+.extraPad{
+    margin-right: 2px;
+}
+
+.left{
+    flex: 1 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.right{
+    /* min-height: 600px; */
+    flex-direction: column;
+    text-align: left;
+    margin-left: 10px;
+    flex: 2 2;
+    justify-content: space-between;
+}
+
+.image{
+    border-radius: .3rem;
+    /* flex: 1; */
+}
+
+@media only screen and (max-width: 600px){
+    .project-card{
+        flex-direction: column !important;
+    }
+    .card-title{
+        margin-top: 10px !important;
+    }
+}
