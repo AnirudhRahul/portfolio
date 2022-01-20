@@ -24,9 +24,10 @@ export default function Home() {
 
       <Container>
         <Container text id="bio" className={raised ? "raised" : "no-transition"}>
-        <Image size='medium' floated='right' alt='Anirudh Rahul' circular className='headshot'>
+        <Image size='medium' floated='right' alt='Anirudh Rahul' circular centered className='headshot'>
           <NextImage src={HeadShot}/>
         </Image>
+
           <p>
             Hey there! I&apos;m Anirudh, and I&apos;m studying Computer Science and Math at MIT. 
           </p>

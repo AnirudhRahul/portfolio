@@ -1,3 +1,8 @@
+var bg_color = {
+    r : 249.0 / 256,
+    g : 243.0 / 256,
+    b : 243.0 / 256,
+}
 // Client-side-only code
 // Utilities
 var canvas = document.getElementById("sakura");
@@ -136,7 +141,8 @@ canvas.height = window.innerHeight;
 
 timeInfo.start = new Date();
 timeInfo.prev = timeInfo.start;
-gl.clearColor(0.76/2, 0.84/2, 0.91/2, 0.5);
+
+gl.clearColor(bg_color.r/2, bg_color.g/2, bg_color.b/2, 0.5);
 gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
 function deleteRenderTarget(rt) {
@@ -724,7 +730,7 @@ function renderScene() {
     //gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     gl.bindFramebuffer(gl.FRAMEBUFFER, renderSpec.mainRT.frameBuffer);
     gl.viewport(0, 0, renderSpec.mainRT.width, renderSpec.mainRT.height);
-    gl.clearColor(0.76/2, 0.84/2, 0.91/2, 0);
+    gl.clearColor(bg_color.r/2, bg_color.g/2, bg_color.b/2, 0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     
     renderPointFlowers();
@@ -753,7 +759,7 @@ function onResize(e) {
 function setViewports() {
     renderSpec.setSize(gl.canvas.width, gl.canvas.height);
     
-    gl.clearColor(0.2, 0.2, 0.5, 1.0);
+    // gl.clearColor(0.5, 0.5, 0.5, 1.0);
     gl.viewport(0, 0, renderSpec.width, renderSpec.height);
     
     var rtfunc = function (rtname, rtw, rth) {

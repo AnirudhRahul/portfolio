@@ -1,8 +1,7 @@
 @media only screen and (max-width: 590px){
     .headshot{
-        float: inherit !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
+        min-width: 100%;
+        text-align: center;
     }
 }
 

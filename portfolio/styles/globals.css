@@ -1,6 +1,12 @@
 body{
   padding-top: 8px;
-  background-color: #b8d8f3;
+  background-color: #f9f3f3;
+  color: hsl(36.5, 13.3%, 15%) !important;
+  /* #f9f3e5 */
+}
+
+.title  *{
+  color: hsl(36.5, 13.3%, 22%) !important;
 }
 
 #me{
@@ -11,11 +17,11 @@ body{
 }
 
 a {
-  color: #db63a9;
+  color: hsl(346.7, 80%, 68%);
 }
 
 a:hover{
-  color: #e04c9d;
+  color: hsl(346.7, 75%, 60%);
 }
 
 /* Label colors! */
