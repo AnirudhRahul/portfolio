@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <meta name="description" content="Hey I'm Ani a student at MIT who loves CS and is dev head at HackMIT!"></meta>
+        <meta name="description" content="Hey I'm Ani a junior at MIT who loves working on quantative problems"></meta>
       </Head>
 
       <Container>
@@ -29,16 +29,15 @@ export default function Home() {
         </Image>
 
           <p>
-            Hey there! I&apos;m Anirudh, and I&apos;m studying Computer Science and Math at MIT. 
+            Hey there! I&apos;m Anirudh, and I&apos;m a junior studying Computer Science and Math at MIT. 
           </p>
 
           <p>
-            Currently, I&apos;m a Dev head at <a href="https://hackmit.org/">HackMIT</a>, and I&apos;ve been working on some of our <a href="https://code.hackmit.org/">apps</a>, including our new registration platform <a href="https://my.hackmit.org/">feather</a> and our submission platform, <a href="https://spectacle.hackmit.org/">spectacle</a>.
+            I was a dev head at <a href="https://hackmit.org/">HackMIT</a>, and I&apos;ve been working on some of our <a href="https://code.hackmit.org/">apps</a>, including our new registration platform <a href="https://my.hackmit.org/">feather</a> and our submission platform, <a href="https://spectacle.hackmit.org/">spectacle</a>.
           </p>
 
-          <p>
-            One of the cooler things I picked up this year was writing smart contracts for the ETH blockchain, which I used to make a puzzle for Hack this year!
-          </p>
+          
+          
 
           <p>
             And I&apos;m excited to keep picking up new stuff because that&apos;s what keeps programming fun!
@@ -49,7 +48,7 @@ export default function Home() {
           </p>
 
           <p>
-            Away from work, I enjoy cooking new recipes and catching up with friends over League.
+            Away from work, I enjoy cooking new recipes and playing strategic games like Qatan or League of Legends.
           </p>
       </Container>
       <Footer></Footer>
