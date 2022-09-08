@@ -46,7 +46,7 @@ export default function Home() {
             This summer I interned as a backend engineer at Bytedance on the Lark Innovation team. I got to work on large scale Go backend, interface with systems such as Kubernetes and RabbitMQ, and apply my knowledge of machine learning by using a BERT model to create tags for message threads.
           </p>
 
-          <p>I'm currently interested in working on difficult quantative problems, where I can apply my knowledge of math, computer science, and machine learning.</p>
+          <p>I&apos;m currently interested in working on difficult quantative problems, where I can apply my knowledge of math, computer science, and machine learning.</p>
 
           <p>
             Throughout high school I always enjoyed going to math and computer science contests with my friends. In junior year I qualified for USACO platinum, and <a href="/top_lads.png" target="_blank">my team</a> even won some statewide CS contests.
