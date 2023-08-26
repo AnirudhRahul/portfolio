@@ -54,7 +54,7 @@ export default function Home() {
           </p>
 
           <p>
-            Last year I was a dev head at <a href="https://hackmit.org/">HackMIT</a>, and I have experience developing and deploying many of our apps such as our registration platform <a href="https://my.hackmit.org/">feather</a> and our submission platform <a href="https://spectacle.hackmit.org/">spectacle</a>.
+            I was also a dev head at <a href="https://hackmit.org/">HackMIT</a>, and I have experience developing and deploying many of our apps such as our registration platform <a href="https://my.hackmit.org/">feather</a> and our submission platform <a href="https://spectacle.hackmit.org/">spectacle</a>.
           </p>
 
           
