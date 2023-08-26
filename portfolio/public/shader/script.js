@@ -866,13 +866,13 @@ document.addEventListener( 'visibilitychange' , ()=>{
     }
 });
 
-window.addEventListener('blur', ()=>{
-    if(animating){
-        toggledOffAuto=true
-        console.log("Toggled off")
-        toggleAnimation(document.getElementById("bg-button"))
-    }
-});
+// window.addEventListener('blur', ()=>{
+//     if(animating){
+//         toggledOffAuto=true
+//         console.log("Toggled off")
+//         toggleAnimation(document.getElementById("bg-button"))
+//     }
+// });
 
 window.addEventListener('focus', ()=>{
     if(!animating && toggledOffAuto){

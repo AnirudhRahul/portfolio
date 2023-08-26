@@ -43,7 +43,7 @@ export default function Home() {
           </p>
 
           <p>
-            This summer I interned as a backend engineer at Bytedance on the Lark Innovation team. I got to work on large scale Go backend, interface with systems such as Kubernetes and RabbitMQ, and apply my knowledge of machine learning by using a BERT model to create tags for message threads.
+            This summer I interned as a software engineer at Janestreet, and worked on exciting things like caching tick data and sexp deduplication.
           </p>
 
           <p>I&apos;m currently interested in working on difficult quantative problems, where I can apply my knowledge of math, computer science, and machine learning.</p>
@@ -60,15 +60,7 @@ export default function Home() {
           
           
 
-          {/* <p>
-            And I&apos;m excited to keep picking up new stuff because that&apos;s what keeps programming fun!
-          </p> */}
 
-         
-
-          <p>
-            Away from work, I enjoy cooking and playing strategic games like Qatan or League of Legends.
-          </p>
       </Container>
       <Footer></Footer>
     </Container>
