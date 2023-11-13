@@ -29,11 +29,11 @@ export default function Home() {
         </Image>
 
           <p>
-            Hey there! I&apos;m Anirudh, and I&apos;m a junior studying Computer Science and Math at MIT. 
+            Hey there! I&apos;m Anirudh, and I&apos;m a senior studying Computer Science and Math at MIT. 
           </p>
 
           <p>
-          Some of my recent coursework includes: 
+          Some of my recent coursework: 
             <ul>
               <li>6.864 Natural Language Processing</li>
               <li>6.869 Advances In Computer Vision</li>
@@ -46,7 +46,7 @@ export default function Home() {
             This summer I interned as a software engineer at Janestreet, and worked on exciting things like caching tick data and sexp deduplication.
           </p>
 
-          <p>I&apos;m currently interested in working on difficult quantative problems, where I can apply my knowledge of math, computer science, and machine learning.</p>
+          {/* <p>I&apos;m currently interested in working on difficult quantative problems, where I can apply my knowledge of math, computer science, and machine learning.</p> */}
 
           <p>
             Throughout high school I always enjoyed going to math and computer science contests with my friends. In junior year I qualified for USACO platinum, and <a href="/top_lads.png" target="_blank">my team</a> even won some statewide CS contests.
