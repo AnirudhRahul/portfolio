@@ -33,24 +33,27 @@ export default function Home() {
           </p>
 
           <p>
-          Some of my recent coursework: 
+          Some fun classes I've taken at MIT include: 
             <ul>
               <li>6.864 Natural Language Processing</li>
               <li>6.869 Advances In Computer Vision</li>
               <li>6.815 Computational Photography</li>
               <li>6.945 Large Scale Symbolic Systems</li>
+              <li>CMS.636 Extending the Museum</li>
+              <li>6.824 Distributed Systems</li>
+
             </ul>
           </p>
 
           <p>
-            This summer I interned as a software engineer at Janestreet, and worked on exciting things like caching tick data and sexp deduplication.
+            Last summer I interned as a software engineer at Janestreet, and worked on exciting things like caching tick data and sexp deduplication.
           </p>
 
           {/* <p>I&apos;m currently interested in working on difficult quantative problems, where I can apply my knowledge of math, computer science, and machine learning.</p> */}
 
           <p>
             Throughout high school I always enjoyed going to math and computer science contests with my friends. In junior year I qualified for USACO platinum, and <a href="/top_lads.png" target="_blank">my team</a> even won some statewide CS contests.
-            I also participated in this years <a href="https://math.mit.edu/~yyao1/integrationbee.html">MIT Integration Bee</a> where I got 6th place!
+            I also participated in the 2022 <a href="https://math.mit.edu/~yyao1/integrationbee.html">MIT Integration Bee</a> where I got 6th place!
           </p>
 
           <p>
