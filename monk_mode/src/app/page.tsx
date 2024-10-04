@@ -48,10 +48,14 @@ export default function Home() {
           {/* <h2 className="text-2xl mb-4 font-semibold">About Me</h2> */}
 
           <p className="mb-4">A bit about me:</p>
-          <p className="mb-4">In high school, I enjoyed math and CS contests. I qualified for USACO platinum and won statewide competitions with <a href="/top_lads.png" target="_blank" className="text-blue-600 hover:underline">my team</a>. I also developed android apps on the side.</p> 
+          <p className="mb-4">In high school, I enjoyed math and CS contests. I qualified for USACO platinum and won some statewide competitions with <a href="/top_lads.png" target="_blank" className="text-blue-600 hover:underline">my team</a>.
+          {/* I also developed android apps on the side. */}
+          </p> 
           <p className="mb-4">I joined HackMIT as a dev head, I gained experience with deployment/infra and working on fullstack apps.</p>
-          <p className="mb-4">I interned at Jane Street, focusing on caching tick data and S-expression deduplication.</p>
+          <p className="mb-4">I interned at Jane Street, where I worked on caching tick data and S-expression deduplication.</p>
 
+
+          <p className="mb-4"> I'm currently working on Cracked an AI motion graphics copilot, we were fortunate to learn a lot from YC S24!</p>
           {/* <p className="mb-4"><strong>Fun Fact:</strong> In 2022, I placed 6th at the <a href="https://math.mit.edu/~yyao1/integrationbee.html" target="_blank" className="text-blue-600 hover:underline">MIT Integration Bee</a>.</p> */}
           {/* <p>Notable achievements:</p>
           <ul className="list-disc list-inside mb-4">
@@ -70,7 +74,9 @@ export default function Home() {
 
         <section className="mb-8">
           {/* <h2 className="text-2xl mb-4 font-semibold">Fav classes:</h2> */}
-          <p className="mb-4"><strong>Fav classes: </strong>Classes I enjoyed the most at MIT.</p>
+          <p className="mb-4"><strong>Fav classes</strong> - 
+            One pattern I noticed in my favorite classes: they were all opportunities, not guarantees. You could very easily take the same classes and not get much out of them. (There's enough here for a blog post 👀)
+          </p>
           <ul className="list-disc list-inside">
           <CourseDetail name={"6.869&nbsp;&nbsp;Advances In Computer Vision"} details="Studied traditional CV techniques like GANs - Created an anime style transfer model" />
           <CourseDetail name={"6.815&nbsp;&nbsp;Computational Photography"} details="Delved into traditional image processing - Built a panoramic image stitcher" />
