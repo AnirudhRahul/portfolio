@@ -7,3 +7,12 @@ portfolio/dist
 portfolio/.netlify/state.json
 portfolio/.env
 portfolio/tmp
+
+monk_mode/node_modules
+monk_mode/package-lock.json
+monk_mode/artifacts
+monk_mode/dist
+monk_mode/.netlify/state.json
+monk_mode/.env
+monk_mode/tmp
+monk_mode/.next
