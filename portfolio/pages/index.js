@@ -19,37 +19,51 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <meta name="description" content="Hey I'm Ani a student at MIT who loves CS and is dev head at HackMIT!"></meta>
+        <meta name="description" content="Hey I'm Ani a junior at MIT who loves working on quantative problems"></meta>
       </Head>
 
       <Container>
         <Container text id="bio" className={raised ? "raised" : "no-transition"}>
-        <Image size='medium' floated='right' alt='Anirudh Rahul' circular className='headshot'>
+        <Image size='medium' floated='right' alt='Anirudh Rahul' circular centered className='headshot'>
           <NextImage src={HeadShot}/>
         </Image>
+
           <p>
-            Hey there! I&apos;m Anirudh, and I&apos;m studying Computer Science and Math at MIT. 
+            Hey there! I&apos;m Anirudh, and I&apos;m a senior studying Computer Science and Math at MIT. 
           </p>
 
           <p>
-            Currently, I&apos;m a Dev head at <a href="https://hackmit.org/">HackMIT</a>, and I&apos;ve been working on some of our <a href="https://code.hackmit.org/">apps</a>, including our new registration platform <a href="https://my.hackmit.org/">feather</a> and our submission platform, <a href="https://spectacle.hackmit.org/">spectacle</a>.
+          Some fun classes I've taken at MIT include: 
+            <ul>
+              <li>6.864 Natural Language Processing</li>
+              <li>6.869 Advances In Computer Vision</li>
+              <li>6.815 Computational Photography</li>
+              <li>6.945 Large Scale Symbolic Systems</li>
+              <li>CMS.636 Extending the Museum</li>
+              <li>6.824 Distributed Systems</li>
+
+            </ul>
           </p>
 
           <p>
-            One of the cooler things I picked up this year was writing smart contracts for the ETH blockchain, which I used to make a puzzle for Hack this year!
+            Last summer I interned as a software engineer at Janestreet, and worked on exciting things like caching tick data and sexp deduplication.
+          </p>
+
+          {/* <p>I&apos;m currently interested in working on difficult quantative problems, where I can apply my knowledge of math, computer science, and machine learning.</p> */}
+
+          <p>
+            Throughout high school I always enjoyed going to math and computer science contests with my friends. In junior year I qualified for USACO platinum, and <a href="/top_lads.png" target="_blank">my team</a> even won some statewide CS contests.
+            I also participated in the 2022 <a href="https://math.mit.edu/~yyao1/integrationbee.html">MIT Integration Bee</a> where I got 6th place!
           </p>
 
           <p>
-            And I&apos;m excited to keep picking up new stuff because that&apos;s what keeps programming fun!
+            I was also a dev head at <a href="https://hackmit.org/">HackMIT</a>, and I have experience developing and deploying many of our apps such as our registration platform <a href="https://my.hackmit.org/">feather</a> and our submission platform <a href="https://spectacle.hackmit.org/">spectacle</a>.
           </p>
 
-          <p>
-            Throughout high school, I had a lot of fun going to competitive programming contests in Florida. <br/> In junior year I qualified for USACO platinum, and <a href="/top_lads.png">my team</a> even won some statewide contests!
-          </p>
+          
+          
 
-          <p>
-            Away from work, I enjoy cooking new recipes and catching up with friends over League.
-          </p>
+
       </Container>
       <Footer></Footer>
     </Container>

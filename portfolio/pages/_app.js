@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com"/>
         <link href="https://fonts.googleapis.com/css2?family=Gilda+Display&display=swap" rel="stylesheet"/>
-        <script src="/shader/script.js" defer></script>
+        <script src="/shader/script.js" async></script>
       </Head>
       <Component {...pageProps} />
     </div>
@@ -47,7 +47,7 @@ function MyApp({ Component, pageProps }) {
         <script src="/shader/script.js" defer></script>
       </Head>
       <Background/>
-      <Menu pointing secondary>
+      <Menu pointing secondary className='title'>
         <Link href="/" passHref>
           <Menu.Item
             id = "me"
