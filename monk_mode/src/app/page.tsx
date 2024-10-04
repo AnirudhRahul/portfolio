@@ -51,7 +51,7 @@ export default function Home() {
           <p className="mb-4">In high school, I enjoyed math and CS contests. I qualified for USACO platinum and won some statewide competitions with <a href="/top_lads.png" target="_blank" className="text-blue-600 hover:underline">my team</a>.
           {/* I also developed android apps on the side. */}
           </p> 
-          <p className="mb-4">I joined HackMIT as a dev head, I gained experience with deployment/infra and working on fullstack apps.</p>
+          <p className="mb-4">I was dev head at HackMIT, where I got to learn about deployment/infra and working on fullstack apps.</p>
           <p className="mb-4">I interned at Jane Street, where I worked on caching tick data and S-expression deduplication.</p>
 
 
