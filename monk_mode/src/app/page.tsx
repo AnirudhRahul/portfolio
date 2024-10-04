@@ -164,7 +164,7 @@ export default function Home() {
 
 function CourseDetail({ name, details }: { name: string; details: string }) {
   return (
-    <li>
+    <li className='text-sm sm:text-base'>
       <span dangerouslySetInnerHTML={{ __html: name }} />
       <span dangerouslySetInnerHTML={{ __html: `<!-- ${details} -->` }} />
     </li>
