@@ -31,7 +31,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen font-mono text-black bg-white">
-      <main className="max-w-[1010px] p-8 mx-auto lg:text-lg lg:pt-12  text-base">
+      <main className="max-w-[888px] p-8 mx-auto lg:pt-12  text-base">
         <h1 ref={titleRef} className="text-4xl mb font-bold">Anirudh Rahul</h1>
         <p ref={subtitleRef} className="text-xl mb-6 font-light">MIT EECS grad</p>
         
@@ -73,9 +73,12 @@ export default function Home() {
         </section> */}
 
         <section className="mb-8">
-          {/* <h2 className="text-2xl mb-4 font-semibold">Fav classes:</h2> */}
-          <p className="mb-4"><strong>Fav classes</strong> - 
-            One pattern I noticed in my favorite classes: they were all opportunities, not guarantees. You could very easily take the same classes and not get much out of them. (There's enough here for a blog post 👀)
+          <p className="mb-4 relative inline-block group">
+            <strong>Fav classes</strong>
+            <span className="ml-1 text-gray-500 text-sm">(hover for more)</span>
+            <span className="absolute left-full ml-2 top-0 w-64 p-2 text-sm text-white bg-black rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+              One pattern I noticed in my favorite classes: they were all opportunities, not guarantees. You could very easily take the same classes and not get much out of them. (There's enough here for a blog post 👀)
+            </span>
           </p>
           <ul className="list-disc list-inside">
           <CourseDetail name={"6.869&nbsp;&nbsp;Advances In Computer Vision"} details="Studied traditional CV techniques like GANs - Created an anime style transfer model" />
@@ -83,8 +86,8 @@ export default function Home() {
           <CourseDetail name={"6.S898&nbsp;Deep Learning"} details="Studied contrastive learning under Phillip Isola" />
           <CourseDetail name={"6.046&nbsp;&nbsp;Advanced Algorithms"} details="Learned about linear programming which is a really useful technique, that I then used in my next internship lol." />
           <CourseDetail name={"6.824&nbsp;&nbsp;Distributed Systems"} details="Learned about Paxos, Raft, and other distributed systems things." />
-          <CourseDetail name={"6.864&nbsp;&nbsp;Natural Language Processing"} details="Explored BERT before the rise of GPTs - Developed a BERT model to generate song lyrics by scraping data from genius.com" />
-          <CourseDetail name={"6.945&nbsp;&nbsp;Large Scale Symbolic Systems"} details="Focused on functional programming - Developed a compiler" />
+          {/* <CourseDetail name={"6.864&nbsp;&nbsp;Natural Language Processing"} details="Explored BERT before the rise of GPTs - Developed a BERT model to generate song lyrics by scraping data from genius.com" />
+          <CourseDetail name={"6.945&nbsp;&nbsp;Large Scale Symbolic Systems"} details="Focused on functional programming - Developed a compiler" /> */}
           </ul>
         </section>
 
@@ -146,12 +149,14 @@ function CourseDetail({ name, details }: { name: string; details: string }) {
 
 function BlogDetail({ name, details, link }: { name: string; details: string; link: string }) {
   return (
-    <li className="relative group mb-2">
-      <a href={link} target="_blank" rel="noopener noreferrer" className="hover:underline text-blue-600">
-        {name}
-      </a>
-      <span className="absolute left-0 top-full mt-2 w-64 p-2 text-sm text-white bg-black rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-        {details}
+    <li className="mb-2">
+      <span className="relative inline-block group">
+        <a href={link} target="_blank" rel="noopener noreferrer" className="hover:underline text-blue-600">
+          {name}
+        </a>
+        <span className="absolute left-0 md:left-[calc(100%+0.5rem)] top-full md:top-0 mt-2 md:mt-0 w-64 p-2 text-sm text-white bg-black rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 transform md:-translate-y-1/4">
+          {details}
+        </span>
       </span>
     </li>
   );
