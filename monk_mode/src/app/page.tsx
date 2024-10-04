@@ -76,7 +76,7 @@ export default function Home() {
           <p className="mb-4 relative inline-block group">
             <strong>Fav classes</strong>
             <span className="ml-1 text-gray-500 text-sm">(hover for more)</span>
-            <span className="absolute left-full ml-2 top-0 w-64 p-2 text-sm text-white bg-black rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+            <span className="absolute left-0 md:left-full ml-0 md:ml-2 top-full md:top-0 mt-2 md:mt-0 w-64 p-2 text-sm text-white bg-black rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 transform md:-translate-y-1/4">
               One pattern I noticed in my favorite classes: they were all opportunities, not guarantees. You could very easily take the same classes and not get much out of them. (There's enough here for a blog post 👀)
             </span>
           </p>
