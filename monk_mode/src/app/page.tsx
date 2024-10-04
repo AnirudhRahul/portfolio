@@ -55,7 +55,7 @@ export default function Home() {
           <p className="mb-4">I interned at Jane Street, where I worked on caching tick data and S-expression deduplication.</p>
 
 
-          <p className="mb-4"> I'm currently working on Cracked an AI motion graphics copilot, we were fortunate to learn a lot from YC S24!</p>
+          <p className="mb-4"> Currently, I&apos;m working on Cracked, an AI motion graphics copilot. We were fortunate to learn a lot from YC S24!</p>
           {/* <p className="mb-4"><strong>Fun Fact:</strong> In 2022, I placed 6th at the <a href="https://math.mit.edu/~yyao1/integrationbee.html" target="_blank" className="text-blue-600 hover:underline">MIT Integration Bee</a>.</p> */}
           {/* <p>Notable achievements:</p>
           <ul className="list-disc list-inside mb-4">
