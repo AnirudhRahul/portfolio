@@ -31,7 +31,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen font-mono text-black bg-white">
-      <main className="max-w-[1010px] p-8 mx-auto lg:text-lg lg:p-20 text-base">
+      <main className="max-w-[1010px] p-8 mx-auto lg:text-lg lg:pt-12  text-base">
         <h1 ref={titleRef} className="text-4xl mb font-bold">Anirudh Rahul</h1>
         <p ref={subtitleRef} className="text-xl mb-6 font-light">MIT EECS grad</p>
         
