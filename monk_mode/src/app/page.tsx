@@ -47,8 +47,8 @@ export default function Home() {
         <section className="mb-8  ">
           {/* <h2 className="text-2xl mb-4 font-semibold">About Me</h2> */}
 
-
-          <p className="mb-4">In high school, I enjoyed math and CS contests, qualifying for USACO platinum and winning statewide competitions with <a href="/top_lads.png" target="_blank" className="text-blue-600 hover:underline">my team</a>. I also developed android apps on the side.</p> 
+          <p className="mb-4">Here's a little bit about myself:</p>
+          <p className="mb-4">In high school, I enjoyed math and CS contests. I qualified for USACO platinum and won statewide competitions with <a href="/top_lads.png" target="_blank" className="text-blue-600 hover:underline">my team</a>. I also developed android apps on the side.</p> 
           <p className="mb-4">I joined HackMIT as a dev head, I gained experience with deployment/infra and working on fullstack apps.</p>
           <p className="mb-4">I interned at Jane Street, focusing on caching tick data and S-expression deduplication.</p>
 
@@ -75,7 +75,7 @@ export default function Home() {
           <CourseDetail name={"6.869&nbsp;&nbsp;Advances In Computer Vision"} details="Studied traditional CV techniques like GANs - Created an anime style transfer model" />
           <CourseDetail name={"6.815&nbsp;&nbsp;Computational Photography"} details="Delved into traditional image processing - Built a panoramic image stitcher" />
           <CourseDetail name={"6.S898&nbsp;Deep Learning"} details="Studied contrastive learning under Phillip Isola" />
-          <CourseDetail name={"6.046&nbsp;&nbsp;Advanced Algorithmns"} details="Learned about linear programming which is a really useful technique, that I then used in my next internship lol." />
+          <CourseDetail name={"6.046&nbsp;&nbsp;Advanced Algorithms"} details="Learned about linear programming which is a really useful technique, that I then used in my next internship lol." />
           <CourseDetail name={"6.824&nbsp;&nbsp;Distributed Systems"} details="Learned about Paxos, Raft, and other distributed systems things." />
           <CourseDetail name={"6.864&nbsp;&nbsp;Natural Language Processing"} details="Explored BERT before the rise of GPTs - Developed a BERT model to generate song lyrics by scraping data from genius.com" />
           <CourseDetail name={"6.945&nbsp;&nbsp;Large Scale Symbolic Systems"} details="Focused on functional programming - Developed a compiler" />
@@ -94,7 +94,7 @@ export default function Home() {
           (More coming soon)
         </section>
 
-        <section className="mb-8">
+        {/* <section className="mb-8">
           <p className="mb-4"><strong>Blogs: </strong>(More coming soon)</p>
           
           <BlogDetail 
@@ -102,7 +102,7 @@ export default function Home() {
             details="Classes are largely what you make of them whether at MIT or anywhere else."
             link="https://medium.com/@anirudh.rahul/classes-are-not-classes-997380b3b22f" 
           />
-        </section>
+        </section> */}
 
 
 
@@ -132,7 +132,8 @@ export default function Home() {
 function CourseDetail({ name, details }: { name: string; details: string }) {
   return (
     <li>
-      {name} <span dangerouslySetInnerHTML={{ __html: `<!-- ${details} -->` }} />
+      <span dangerouslySetInnerHTML={{ __html: name }} />
+      <span dangerouslySetInnerHTML={{ __html: `<!-- ${details} -->` }} />
     </li>
   );
 }
