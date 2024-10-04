@@ -150,7 +150,7 @@ export default function Home() {
           '(ᵔᴥᵔ)' */}
         </p>
 
-        <footer className="text-center text-sm mt-2 pb-2">
+        <footer className="text-center text-sm mt-2 pb-2 mb-2 sm:mb-0">
           <a href="https://github.com/AnirudhRahul" className="text-blue-600 hover:underline mr-4">GitHub</a>
           <a href="https://www.linkedin.com/in/anirudh-rahul-34a2bb195" className="text-blue-600 hover:underline mr-4">LinkedIn</a>
           <a href="https://x.com/Ani_da_dev" className="text-blue-600 hover:underline">Twitter</a>
