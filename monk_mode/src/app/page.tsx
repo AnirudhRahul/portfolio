@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
 import Link from 'next/link';
@@ -10,24 +10,48 @@ gsap.registerPlugin(ScrambleTextPlugin);
 export default function Home() {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const [animationTriggered, setAnimationTriggered] = useState(false);
 
   useEffect(() => {
-    if (titleRef.current && subtitleRef.current) {
-      gsap.to(titleRef.current, {
-        delay: 6, // Add a delay of 1 second before starting the animation
-        duration: 2, // Increase the duration to make the motion longer
-        scrambleText: { text: "Hi, I'm Ani", chars: "01", revealDelay: 0.5 },
-        ease: "power2.inOut", // Use a smoother easing function
-      });
+    const handleInteraction = () => {
+      if (!animationTriggered) {
+        triggerAnimation();
+        setAnimationTriggered(true);
+      }
+    };
 
-      gsap.to(subtitleRef.current, {
-        delay: 6, // Add a delay of 1 second before starting the animation
-        duration: 2, // Increase the duration to make the motion longer
-        scrambleText: { text: "I like to code :)", chars: "01", revealDelay: 0.5  },
-        ease: "power2.inOut", // Use a smoother easing function
-      });
+    const triggerAnimation = () => {
+      if (titleRef.current && subtitleRef.current) {
+        gsap.to(titleRef.current, {
+          duration: 2,
+          scrambleText: { text: "Hi, I'm Ani", chars: "01", revealDelay: 0.5 },
+          ease: "power2.inOut",
+        });
+
+        gsap.to(subtitleRef.current, {
+          duration: 2,
+          scrambleText: { text: "I like to code :)", chars: "01", revealDelay: 0.5 },
+          ease: "power2.inOut",
+        });
+      }
+    };
+
+    const isSmallScreen = window.innerWidth < 520; // Adjust this breakpoint as needed
+
+    if (isSmallScreen) {
+      // window.addEventListener('scroll', handleInteraction, { once: true });
+      window.addEventListener('touchstart', handleInteraction, { once: true });
+    } else {
+      // For larger screens, keep the 6-second delay
+      const timer = setTimeout(triggerAnimation, 4269);
+      return () => clearTimeout(timer);
     }
-  }, []);
+
+    return () => {
+      // window.removeEventListener('scroll', handleInteraction);
+      window.removeEventListener('touchstart', handleInteraction);
+    };
+  }, [animationTriggered]);
 
   return (
     <div className="min-h-screen font-mono text-black bg-white">
@@ -118,7 +142,7 @@ export default function Home() {
       </main>
 
 
-      <p className="text-lg my-8 whitespace-nowrap overflow-hidden">
+      <p className="text-lg  whitespace-nowrap overflow-hidden">
           {'(ᵔᴥᵔ)'.repeat(1000)}
           {/* 'ᕙ(⇀‸↼‶)ᕗ'
           '( ⚆ _ ⚆ )'
@@ -126,11 +150,11 @@ export default function Home() {
           '(ᵔᴥᵔ)' */}
         </p>
 
-        <footer className="text-center text-sm mt-2 pb-4">
+        <footer className="text-center text-sm mt-2 pb-2">
           <a href="https://github.com/AnirudhRahul" className="text-blue-600 hover:underline mr-4">GitHub</a>
           <a href="https://www.linkedin.com/in/anirudh-rahul-34a2bb195" className="text-blue-600 hover:underline mr-4">LinkedIn</a>
           <a href="https://x.com/Ani_da_dev" className="text-blue-600 hover:underline">Twitter</a>
-          <p className="mt-4"><em>All truly strong people are kind.</em></p>
+          <p className="mt-2"><em>All truly strong people are kind.</em></p>
           {/* <p className="mt-4">Made with ❤️ by Anirudh Rahul</p> */}
         </footer>
 
