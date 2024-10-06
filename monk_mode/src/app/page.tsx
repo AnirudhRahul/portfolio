@@ -47,6 +47,13 @@ export default function Home() {
       return () => clearTimeout(timer);
     }
 
+    // Check system preference and set the class on the html element
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+
     return () => {
       // window.removeEventListener('scroll', handleInteraction);
       window.removeEventListener('touchstart', handleInteraction);
@@ -54,7 +61,7 @@ export default function Home() {
   }, [animationTriggered]);
 
   return (
-    <div className="min-h-screen flex flex-col font-mono text-black bg-white">
+    <div className="min-h-screen flex flex-col font-mono text-black dark:text-[#D4D4D4] bg-white dark:bg-[#1A191A]">
       <main className="flex-grow max-w-[888px] p-8 mx-auto lg:pt-12 text-base">
         <h1 ref={titleRef} className="text-4xl mb font-bold">Anirudh Rahul</h1>
         <p ref={subtitleRef} className="text-xl mb-6 font-light">MIT EECS grad</p>
@@ -94,8 +101,8 @@ export default function Home() {
         <section className="mb-8">
           <p className="mb-4 relative inline-block group">
             <strong>Fav classes</strong>
-            <span className="ml-1 text-gray-500 text-sm">(hover for more)</span>
-            <span className="absolute left-0 md:left-full ml-0 md:ml-2 top-full md:top-0 mt-2 md:mt-0 w-64 p-2 text-sm text-white bg-black rounded hidden group-hover:block md:block md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 z-10 transform md:-translate-y-1/4">
+            <span className="ml-1 text-gray-500 dark:text-[#6A9955] text-sm">(hover for more)</span>
+            <span className="absolute left-0 md:left-full ml-0 md:ml-2 top-full md:top-0 mt-2 md:mt-0 w-64 p-2 text-sm text-white bg-black dark:bg-[#2D2D2D] rounded hidden group-hover:block md:block md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 z-10 transform md:-translate-y-1/4">
               One pattern I noticed in my favorite classes: they were all opportunities, not guarantees. You could very easily take the same classes and not get much out of them. (There's enough here for a blog post 👀)
             </span>
           </p>
@@ -137,7 +144,7 @@ export default function Home() {
       </main>
 
 
-      <p className="text-lg  whitespace-nowrap overflow-hidden">
+      <p className="text-lg  whitespace-nowrap overflow-hidden dark:text-[#CE9178]">
           {'(ᵔᴥᵔ)'.repeat(1000)}
           {/* 'ᕙ(⇀‸↼‶)ᕗ'
           '( ⚆ _ ⚆ )'
@@ -145,7 +152,7 @@ export default function Home() {
           '(ᵔᴥᵔ)' */}
         </p>
 
-        <footer className="text-center text-sm mt-2 pb-2 mb-2 sm:mb-0">
+        <footer className="text-center text-sm mt-2 pb-2 mb-2 sm:mb-0 text-gray-700 dark:text-[#6A9955]">
           <a href="https://github.com/AnirudhRahul" className="text-blue-600 hover:underline mr-4">GitHub</a>
           <a href="https://www.linkedin.com/in/anirudh-rahul-34a2bb195" className="text-blue-600 hover:underline mr-4">LinkedIn</a>
           <a href="https://x.com/Ani_da_dev" className="text-blue-600 hover:underline">Twitter</a>
