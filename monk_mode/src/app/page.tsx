@@ -71,15 +71,10 @@ export default function Home() {
         <section className="mb-8  ">
           {/* <h2 className="text-2xl mb-4 font-semibold">About Me</h2> */}
 
-          <p className="mb-4">A bit about me:</p>
-          <p className="mb-4">In high school, I enjoyed math and CS contests. I qualified for USACO platinum and won some statewide competitions with <a href="/top_lads.png" target="_blank" className="text-blue-600 hover:underline">my team</a>.
-          {/* I also developed android apps on the side. */}
-          </p> 
-          <p className="mb-4">I was dev head at HackMIT, where I got to learn about deployment/infra and working on fullstack apps.</p>
-          <p className="mb-4">I interned at Jane Street, where I worked on caching tick data and S-expression deduplication.</p>
-
-
-          <p className="mb-4"> Currently, I&apos;m working on Cracked, an AI motion graphics copilot. We were fortunate to learn a lot from YC S24!</p>
+          <p className="mb-4">Former math and programming contest enjoyer (qualified for USACO Platinum).</p>
+          <p className="mb-4">Former head of software at HackMIT (managed fullstack apps and their infra).</p>
+          <p className="mb-4">Worked on caching tick data and S-expression deduplication at Jane Street</p>
+          <p className="mb-4">Currently building Cracked (YC S24), an AI motion graphics copilot</p>
           {/* <p className="mb-4"><strong>Fun Fact:</strong> In 2022, I placed 6th at the <a href="https://math.mit.edu/~yyao1/integrationbee.html" target="_blank" className="text-blue-600 hover:underline">MIT Integration Bee</a>.</p> */}
           {/* <p>Notable achievements:</p>
           <ul className="list-disc list-inside mb-4">
