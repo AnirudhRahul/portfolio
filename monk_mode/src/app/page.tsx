@@ -54,8 +54,8 @@ export default function Home() {
   }, [animationTriggered]);
 
   return (
-    <div className="min-h-screen font-mono text-black bg-white">
-      <main className="max-w-[888px] p-8 mx-auto lg:pt-12  text-base">
+    <div className="min-h-screen flex flex-col font-mono text-black bg-white">
+      <main className="flex-grow max-w-[888px] p-8 mx-auto lg:pt-12 text-base">
         <h1 ref={titleRef} className="text-4xl mb font-bold">Anirudh Rahul</h1>
         <p ref={subtitleRef} className="text-xl mb-6 font-light">MIT EECS grad</p>
         
@@ -71,8 +71,8 @@ export default function Home() {
         <section className="mb-8  ">
           {/* <h2 className="text-2xl mb-4 font-semibold">About Me</h2> */}
 
-          <p className="mb-4">Former math and programming contest enjoyer (qualified for USACO Platinum).</p>
-          <p className="mb-4">Former head of software at HackMIT (managed fullstack apps and their infra).</p>
+          <p className="mb-4">Former math and programming contest enjoyer (qualified for USACO Platinum)</p>
+          <p className="mb-4">Former head of software at HackMIT</p>
           <p className="mb-4">Worked on caching tick data and S-expression deduplication at Jane Street</p>
           <p className="mb-4">Currently building Cracked (YC S24), an AI motion graphics copilot</p>
           {/* <p className="mb-4"><strong>Fun Fact:</strong> In 2022, I placed 6th at the <a href="https://math.mit.edu/~yyao1/integrationbee.html" target="_blank" className="text-blue-600 hover:underline">MIT Integration Bee</a>.</p> */}
@@ -95,7 +95,7 @@ export default function Home() {
           <p className="mb-4 relative inline-block group">
             <strong>Fav classes</strong>
             <span className="ml-1 text-gray-500 text-sm">(hover for more)</span>
-            <span className="absolute left-0 md:left-full ml-0 md:ml-2 top-full md:top-0 mt-2 md:mt-0 w-64 p-2 text-sm text-white bg-black rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 transform md:-translate-y-1/4">
+            <span className="absolute left-0 md:left-full ml-0 md:ml-2 top-full md:top-0 mt-2 md:mt-0 w-64 p-2 text-sm text-white bg-black rounded hidden group-hover:block md:block md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 z-10 transform md:-translate-y-1/4">
               One pattern I noticed in my favorite classes: they were all opportunities, not guarantees. You could very easily take the same classes and not get much out of them. (There's enough here for a blog post 👀)
             </span>
           </p>
@@ -119,7 +119,7 @@ export default function Home() {
             details="Very randomly had some code I wrote turned into an example blog on modal" 
             link="https://modal.com/docs/examples/finetune_yolo#fine-tuning-and-inference-for-computer-vision-with-yolo" 
           />
-          (More coming soon)
+          (More blogs about tech/life coming soon)
         </section>
 
         {/* <section className="mb-8">
@@ -173,9 +173,10 @@ function BlogDetail({ name, details, link }: { name: string; details: string; li
         <a href={link} target="_blank" rel="noopener noreferrer" className="hover:underline text-blue-600">
           {name}
         </a>
-        <span className="absolute left-0 md:left-[calc(100%+0.5rem)] top-full md:top-0 mt-2 md:mt-0 w-64 p-2 text-sm text-white bg-black rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 transform md:-translate-y-1/4">
+        <span className="absolute left-0 md:left-full ml-0 md:ml-2 top-full md:top-0 mt-2 md:mt-0 w-64 p-2 text-sm text-white bg-black rounded hidden group-hover:block md:block md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 z-10 transform md:-translate-y-1/4">
           {details}
         </span>
+        {/* Applied the same small/md CSS technique for the tooltip as in the first tooltip */}
       </span>
     </li>
   );
