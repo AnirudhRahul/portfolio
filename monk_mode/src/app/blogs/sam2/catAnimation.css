@@ -1,0 +1,32 @@
+.cat-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.cat {
+  width: 70px;
+  height: 50px;
+  background-size: contain;
+  position: absolute;
+  animation: run-cat 30s linear infinite;
+  top: 50%;
+  transform: translateY(-50%) scaleX(-1);
+}
+
+.cat-midnight { background-image: url('https://ssl.gstatic.com/colaboratory-static/common/7816c1008b71cc5db5eb22de15c5f6cb/v2/common/img/MIDNIGHT.gif'); }
+.cat-kinako { background-image: url('https://ssl.gstatic.com/colaboratory-static/common/7816c1008b71cc5db5eb22de15c5f6cb/v2/common/img/KINAKO.gif'); }
+.cat-firefox { background-image: url('https://ssl.gstatic.com/colaboratory-static/common/7816c1008b71cc5db5eb22de15c5f6cb/v2/common/img/FIREFOX.gif'); }
+.cat-maneki { background-image: url('https://ssl.gstatic.com/colaboratory-static/common/7816c1008b71cc5db5eb22de15c5f6cb/v2/common/img/MANEKI.gif'); }
+
+@keyframes run-cat {
+  0% { left: -50px; transform: translateY(-50%) scaleX(-1); }
+  49% { transform: translateY(-50%) scaleX(-1); }
+  50% { left: 100%; transform: translateY(-50%) scaleX(1); }
+  99% { transform: translateY(-50%) scaleX(1); }
+  100% { left: -50px; transform: translateY(-50%) scaleX(-1); }
+}
