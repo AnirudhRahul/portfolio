@@ -100,6 +100,37 @@ export default function Home() {
         /> */}
 
       </section>
+
+      <section className="mb-8">
+        <p className="mb-4"><strong>Projects: </strong></p>
+        <ul className="list-disc list-inside">
+
+          <ProjectDetail 
+            name="usaco.moe" 
+            details="Slick USACO results viewer"
+            link="https://usaco.moe"
+          />
+
+          <ProjectDetail 
+            name="Overeasy" 
+            details="Zero-shot CV model orchestration framework"
+            link="https://github.com/overeasy-sh/overeasy"
+          />
+          {/* Created a Python framework for orchestrating zero-shot computer vision models. 
+              Enables building custom pipelines for object detection, classification, and 
+              segmentation without training data. */}
+          
+          <ProjectDetail 
+            name="Reddit-Embed" 
+            details="Native Reddit thread embedder"
+            link="https://github.com/AnirudhRahul/Reddit-Embed"
+          />
+          {/* Built a JavaScript plugin for natively embedding Reddit posts/comments onto any website. 
+              No API key needed, client-side rendered, and easily customizable. */}
+        </ul>
+      </section>
+
+
     </main>
   );
 }
@@ -125,6 +156,17 @@ function BlogDetail({ name, details, link }: { name: string; details: string; li
         </span>
         {/* Applied the same small/md CSS technique for the tooltip as in the first tooltip */}
       </span>
+    </li>
+  );
+}
+
+function ProjectDetail({ name, details, link }: { name: string; details: string; link: string }) {
+  return (
+    <li className="mb-2">
+      <a href={link} target="_blank" rel="noopener noreferrer" className="hover:underline text-blue-600">
+        {name}
+      </a>
+      <span className="text-[#6A9955]"> {`// ${details}`}</span>
     </li>
   );
 }
