@@ -190,8 +190,11 @@ export default function AsciiCat() {
           whiteSpace: 'pre',
           fontSize: '16px',
           lineHeight: '1.1',
-          transition: bouncing ? 'left 0.05s ease-in-out, top 0.15s ease-in-out' : 'left 0.1s linear',
-          transform: direction === -1 ? 'scaleX(-1)' : 'none',
+          transition: bouncing 
+            ? 'left 0.05s ease-in-out, top 0.15s ease-in-out, transform 0.3s ease-in-out' 
+            : 'left 0.1s linear',
+          transform: direction === -1 ? 'scaleX(-1)' : 'scaleX(1)',
+          transformOrigin: 'center',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
