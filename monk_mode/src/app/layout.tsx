@@ -5,6 +5,7 @@ import "./globals.css";
 import "./blogs/sam2/catAnimation.css";
 import { cookies } from 'next/headers';
 import Cat from "./Cat";
+import dynamic from 'next/dynamic';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -30,6 +31,9 @@ function pseudoRandom(seed: number): number {
 const ANIMATION_DURATION = 10; // in seconds
 const TOTAL_CATS = 20;
 
+// Dynamically import the AsciiCat component to avoid server-side rendering issues
+const AsciiCat = dynamic(() => import('./AsciiCat'), { ssr: false });
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -54,13 +58,13 @@ export default function RootLayout({
         <div className="flex-grow">
           {children}
         </div>
-        <div className="relative overflow-hidden" style={{ height: '50px' }}>
-          <p className="text-lg whitespace-nowrap overflow-hidden dark:text-[#CE9178]">
-            {'(ᵔᴥᵔ)'.repeat(1000)}
-          </p>
-
-          {/* <Cat />  */}
-    
+        <div className="relative" style={{ marginBottom: '-15px' }}>
+          <AsciiCat />
+          <div className="relative overflow-hidden" style={{ height: '50px' }}>
+            <p className="text-lg whitespace-nowrap overflow-hidden dark:text-[#CE9178]">
+              {'(ᵔᴥᵔ)'.repeat(1000)}
+            </p>
+          </div>
         </div>
         <footer className="text-center text-sm mt-2 pb-2 mb-2 sm:mb-0 text-gray-700 dark:text-[#6A9955]">
           <a href="https://github.com/AnirudhRahul" className="text-blue-600 hover:underline mr-4">GitHub</a>
