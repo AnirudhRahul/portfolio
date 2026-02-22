@@ -94,6 +94,11 @@ export default function Home() {
           link="https://modal.com/docs/examples/finetune_yolo#fine-tuning-and-inference-for-computer-vision-with-yolo" 
         />
         {/* <BlogDetail 
+           name="Dynamic Programming: recursion + caching" 
+           details="Knapsack, edit distance, LIS and how to count states for runtime" 
+           link="/blogs/algos/dp" 
+        /> */}
+        {/* <BlogDetail 
           name="That time I made the fastest SAM2 API" 
           details="Blog post about creating a high-performance SAM2 API" 
           link="/blogs/sam2" 

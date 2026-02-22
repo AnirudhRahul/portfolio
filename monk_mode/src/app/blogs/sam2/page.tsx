@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
-import './catAnimation.css';
 
 export default function SAM2Blog() {
   return (

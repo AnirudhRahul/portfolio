@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react"
 import localFont from "next/font/local";
 import "./globals.css";
-import "./blogs/sam2/catAnimation.css";
+import "./catAnimation.css";
 import { cookies } from 'next/headers';
 import Cat from "./Cat";
 import dynamic from 'next/dynamic';
