@@ -68,8 +68,11 @@ export default function Home() {
         <p className="mb-4">
           <span className="text-[#6A9955]">// Jane Street: Cache optimization, S-expr deduplication</span>
         </p>
-        <p className="mb-4">
+        {/* <p className="mb-4">
           Building Cracked (YC S24)
+        </p> */}
+        <p className="mb-4">
+          I&apos;m doing ML @ David AI working on all things audio quality
         </p>
       </section>
 
