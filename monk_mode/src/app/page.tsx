@@ -72,7 +72,7 @@ export default function Home() {
           Building Cracked (YC S24)
         </p> */}
         <p className="mb-4">
-          ML @ Davidi AI working on automating audio quality
+          ML @ DavidAI working on automating audio quality
         </p>
       </section>
 
