@@ -68,9 +68,9 @@ export default function Home() {
         <p className="mb-4">
           <span className="text-[#6A9955]">// Jane Street: Cache optimization, S-expr deduplication</span>
         </p>
-        {/* <p className="mb-4">
-          Building Overeasy (YC S24)
-        </p> */}
+        <p className="mb-4">
+          <span className="text-[#6A9955]">// Overeasy (YC S24): Zero-shot CV model orchestration</span>
+        </p>
         <p className="mb-4">
           ML @ DavidAI working on automating audio quality
         </p>
